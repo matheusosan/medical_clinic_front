@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import Man from "../../../public/MAN.png";
 import Hearth from "../../../public/HEARTICON.png";
@@ -30,7 +29,7 @@ const services = [
   {
     name: "Ortopedia",
     description:
-      "O serviço de Ortopedia da [Nome da Clínica] trata de doenças e lesões do sistema músculo-esquelético. Nossos ortopedistas estão prontos para oferecer o melhor tratamento, desde pequenas lesões até cirurgias complexas.",
+      "O serviço de Ortopedia da Medical Clinic trata de doenças e lesões do sistema músculo-esquelético. Nossos ortopedistas estão prontos para oferecer o melhor tratamento, desde pequenas lesões até cirurgias complexas.",
     icon: Bone,
   },
   {
@@ -49,20 +48,18 @@ const services = [
 
 export default function Specialities() {
   return (
-    <section className="flex justify-between px-24 py-32">
+    <section id="especialidades" className="flex justify-between px-24 py-32">
       <div className="flex flex-col items-center justify-center gap-12">
         <h2 className="text-4xl font-bold">NOSSAS ESPECIALIDADES</h2>
         <div className="grid grid-cols-3 w-[928px] h-[660px] gap-4">
           {services.map((service) => (
             <motion.div
               key={service.name}
-              className="flex flex-col items-center justify-center gap- w-[300px] h-[320px] border border-[#0B4FFF] rounded-xl px-4"
+              className="flex flex-col items-center justify-center gap-3 w-[300px] h-[320px] border border-[#0b50ff52] rounded-xl px-4 cursor-pointer hover:scale-105 transition-transform"
             >
               <img src={service.icon} alt="" />
               <h2 className="text-2xl font-extrabold">{service.name}</h2>
-              <p className="leading-tights text-center">
-                {service.description}
-              </p>
+              <p className="leading-tight text-center">{service.description}</p>
             </motion.div>
           ))}
         </div>

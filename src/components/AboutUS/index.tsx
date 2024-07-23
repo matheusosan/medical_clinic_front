@@ -4,7 +4,7 @@ import About from "../../../public/ABOUT_US.png";
 
 export default function AboutUs() {
   return (
-    <section className="flex justify-center gap-24">
+    <section id="sobre" className="flex justify-center gap-24">
       <motion.img src={About} alt="" />
       <div className="flex flex-col gap-6">
         <h2 className="font-extrabold text-[#0B4FFF] text-4xl">SOBRE NÓS</h2>
