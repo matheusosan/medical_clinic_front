@@ -1,9 +1,9 @@
-import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <section className="flex items-center home-background w-full h-[70vh] px-[15%]">
+    <section className="flex items-center home-background w-full h-[70vh] px-[15%] text-white">
       <motion.div
         initial={{ opacity: 0, x: -100 }}
         animate={{ opacity: 1, x: 0 }}
@@ -19,12 +19,12 @@ export default function Home() {
           qualidade, garantimos que você estará em boas mãos conosco. Sua saúde
           e bem-estar são nossa prioridade.
         </p>
-        <a
+        <Link
+          to={"/agendamento"}
           className="flex items-center justify-center w-[325px] h-[70px] rounded-3xl text-xl font-bold bg-[#0B4FFF] outline-none text-white"
-          href=""
         >
           FAÇA SEU AGENDAMENTO
-        </a>
+        </Link>
       </motion.div>
     </section>
   );
