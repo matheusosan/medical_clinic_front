@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply scroll-smooth;
+}
+
 .home-background {
-  background-image: url("../public/HOME.png");
+  background-image: url("../public/HOME3.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
