@@ -1,7 +1,39 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
+import { ChangeEvent, useEffect, useState } from "react";
+import { getAllUsers } from "../services/specialities.service";
+
+interface Service {
+  id: number;
+  name: string;
+  price: number;
+}
 
 export default function Agendamento() {
+  const [data, setData] = useState<Service[]>([]);
+  const [selectedService, setSelectedService] = useState<Service | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const data = await getAllUsers();
+        setData(data);
+      } catch (error) {
+        throw new Error("Failed to fetch users");
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const handleSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = event.target.value;
+    const service = data.find((service) => service.id === Number(selectedId));
+    setSelectedService(service);
+  };
+
   return (
     <>
       <Header />
@@ -41,11 +73,17 @@ export default function Agendamento() {
               <h2 className="font-bold text-xl">
                 Selecione a especialidade desejada
               </h2>
-              <select name="" id=""></select>
+              <select onChange={handleSelectChange} className="w-64">
+                {data.map((service) => (
+                  <option key={service.id} value={service.id}>
+                    {service.name}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="gap-5">
               <h2 className="font-bold text-xl">Valor da Consulta</h2>
-              <p>R$00,00</p>
+              <p>{selectedService ? selectedService.price : "R$00,00"}</p>
             </div>
             <div className="gap-5">
               <h2 className="font-bold text-xl">Selecione uma data</h2>
@@ -67,6 +105,7 @@ export default function Agendamento() {
           <button className="px-12 py-4 font-bold bg-[#42DA5B] text-white">
             AGENDAR
           </button>
+          <button onClick={() => console.log(selectedService)}>LOG</button>
         </div>
       </main>
     </>
