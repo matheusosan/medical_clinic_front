@@ -12,23 +12,32 @@ export default function Header() {
         <a className="font-bold" href="/">
           Home
         </a>
-        <a className="font-bold" href="#especialidades">
+        <a className="font-bold" href="/#especialidades">
           Especialidades
         </a>
-        <a className="font-bold" href="#sobre">
+        <a className="font-bold" href="/#sobre">
           Sobre Nós
         </a>
-        <a className="font-bold" href="#contato">
+        <a className="font-bold" href="/#contato">
           Contato
         </a>
       </nav>
 
-      <Link
-        to={"/agendamento"}
-        className="rounded-3xl px-8 py-2 text-white font-bold text-xl bg-[#0B4FFF]"
-      >
-        Agendar
-      </Link>
+      <div className="flex gap-4">
+        <Link
+          to={"/agendamento"}
+          className="rounded-xl px-6 py-2 text-white font-bold bg-[#0B4FFF]"
+        >
+          Agendar
+        </Link>
+
+        <Link
+          to={"/cadastrar"}
+          className="rounded-xl px-6 py-2 text-[#0B4fff] font-bold border border-[#0B4FFF]"
+        >
+          Cadastrar-se
+        </Link>
+      </div>
     </motion.header>
   );
 }

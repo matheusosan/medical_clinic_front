@@ -20,6 +20,7 @@ export default function Home() {
           e bem-estar são nossa prioridade.
         </p>
         <Link
+          data-testid="btn"
           to={"/agendamento"}
           className="flex items-center justify-center w-[325px] h-[70px] rounded-3xl text-xl font-bold bg-[#0B4FFF] outline-none text-white"
         >

@@ -1,6 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
-import About from "../../../public/ABOUT_US.png";
+import About from "/ABOUT_US.png";
 
 export default function AboutUs() {
   return (

@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import Man from "../../../public/MAN.png";
-import Hearth from "../../../public/HEARTICON.png";
-import Bone from "../../../public/BONE.png";
-import Dermato from "../../../public/DERMATO.png";
-import Pediatria from "../../../public/PEDIATRIA.png";
-import Tooth from "../../../public/TOOTH.png";
-import Woman from "../../../public/WOMAN.png";
+import Man from "/MAN.png";
+import Hearth from "/HEARTICON.png";
+import Bone from "/BONE.png";
+import Dermato from "/DERMATO.png";
+import Pediatria from "/PEDIATRIA.png";
+import Tooth from "/TOOTH.png";
+import Woman from "/WOMAN.png";
 
 const services = [
   {
