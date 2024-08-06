@@ -7,7 +7,7 @@ html {
 }
 
 .home-background {
-  background-image: url("../public/HOME3.webp");
+  background-image: url("/HOME3.webp");
   background-repeat: no-repeat;
   background-size: cover;
 }
