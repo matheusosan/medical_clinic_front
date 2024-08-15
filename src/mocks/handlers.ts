@@ -1,19 +1,9 @@
 import { http, HttpResponse } from "msw";
+import { specialitiesResponse } from "./mocked-responses";
 
 export const handlers = [
   http.get("http://localhost:8080/service", () => {
-    return HttpResponse.json([
-      {
-        id: 1,
-        name: "Dermatologia",
-        price: 99.9,
-      },
-      {
-        id: 2,
-        name: "Odontologia",
-        price: 109.9,
-      },
-    ]);
+    return HttpResponse.json(specialitiesResponse);
   }),
 
   http.get("http://localhost:8080/client/cpf/1234567891011", () => {
