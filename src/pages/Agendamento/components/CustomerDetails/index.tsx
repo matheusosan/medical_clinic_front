@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useCostumer } from "../../../hooks/useCostumer";
+import { useCostumer } from "../../../../hooks/useCostumer";
 
 export default function CustomerDetails() {
   const { register, isError, isLoading, handleSubmit, onSubmit, client } =

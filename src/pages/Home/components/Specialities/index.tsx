@@ -48,10 +48,13 @@ const services = [
 
 export default function Specialities() {
   return (
-    <section id="especialidades" className="flex justify-between px-24 py-32">
+    <section
+      id="especialidades"
+      className="flex flex-col md:flex-row justify-center md:justify-between md:px-24 md:py-32"
+    >
       <div className="flex flex-col items-center justify-center gap-12">
-        <h2 className="text-4xl font-bold">NOSSAS ESPECIALIDADES</h2>
-        <div className="grid grid-cols-3 w-[928px] h-[660px] gap-4">
+        <h2 className="text-lg md:text-4xl font-bold">NOSSAS ESPECIALIDADES</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full md:w-[928px] h-auto md:h-[660px] gap-4">
           {services.map((service) => (
             <motion.div
               key={service.name}
@@ -64,7 +67,7 @@ export default function Specialities() {
           ))}
         </div>
       </div>
-      <img src={Man} alt="" />
+      <img className="hidden md:flex" src={Man} alt="" />
     </section>
   );
 }

@@ -1,13 +1,22 @@
-import { Link } from "react-router-dom";
-import CustomerDetails from "../../components/Appointment/CustomerDetails";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { useCostumer } from "../../hooks/useCostumer";
-import AppointmentDetails from "../../components/Appointment/AppointmentDetails";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
+import { useAppointment } from "../../hooks/useAppointment";
+import AppointmentDetails from "./components/AppointmentDetails";
+import CustomerDetails from "./components/CustomerDetails";
+import {
+  appointmentSchema,
+  AppointmentSchema,
+} from "./schemas/appointment.schema";
 
 export default function Agendamento() {
-  const methods = useForm();
-  const { client } = useCostumer();
+  const methods = useForm<AppointmentSchema>({
+    mode: "onChange",
+    resolver: zodResolver(appointmentSchema),
+  });
+
+  const { onSubmit } = useAppointment();
 
   return (
     <>
@@ -21,27 +30,28 @@ export default function Agendamento() {
           <form
             id="appointment"
             className="flex border border-slate-200 rounded-xl w-full"
+            onSubmit={methods.handleSubmit(onSubmit)}
           >
             <CustomerDetails />
             <AppointmentDetails />
           </form>
-        </FormProvider>
 
-        <div className="flex w-full justify-between">
-          <Link
-            to={"/"}
-            className="px-12 py-4 font-bold rounded-xl bg-[#F35555] text-white shadow-[#9c9c9c] shadow-lg"
-          >
-            CANCELAR
-          </Link>
-          <button
-            className="px-12 py-4 font-bold rounded-xl bg-[#6bee4a] text-white shadow-[#9c9c9c] shadow-lg"
-            form="appointment"
-            type="submit"
-          >
-            AGENDAR
-          </button>
-        </div>
+          <div className="flex w-full justify-between">
+            <Link
+              to={"/"}
+              className="px-12 py-4 font-bold rounded-xl bg-[#F35555] text-white shadow-[#9c9c9c] shadow-lg"
+            >
+              CANCELAR
+            </Link>
+            <button
+              className="px-12 py-4 font-bold rounded-xl bg-[#4bb92f] text-white shadow-[#9c9c9c] shadow-lg"
+              form="appointment"
+              type="submit"
+            >
+              AGENDAR
+            </button>
+          </div>
+        </FormProvider>
       </main>
     </>
   );

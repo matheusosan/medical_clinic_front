@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import LOGO from "/LOGO.png";
 
 export default function Header() {
   return (
     <motion.header className="flex items-center justify-between px-[15%] w-full h-[12vh] fixed bg-white top-0 z-50">
       <Link to={"/"} className="font-bold">
-        LOGOEMPRESA
+        <img src={LOGO} alt="" className="w-10 h-10" />
       </Link>
 
       <nav className="flex items-center justify-center gap-20">
-        <a className="font-bold" href="/">
+        <a className="font-bold" href="/#home">
           Home
         </a>
         <a className="font-bold" href="/#especialidades">

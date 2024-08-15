@@ -1,5 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { Controller, useFormContext } from "react-hook-form";
-import { useAppointment } from "../../../hooks/useAppointment";
+import { getAllServices } from "../../../../api/services/specialities.service";
+import { useSpecialities } from "../../../../hooks/useSpeciaities";
+import { AppointmentSchema } from "../../schemas/appointment.schema";
 
 const horarios = [
   "09:00",
@@ -14,9 +17,22 @@ const horarios = [
 ];
 
 export default function AppointmentDetails() {
-  const { specialities } = useAppointment();
+  const { data: specialities } = useQuery({
+    queryKey: ["specialities"],
+    queryFn: () => getAllServices(),
+  });
 
-  const { register, control } = useFormContext();
+  const {
+    register,
+    watch,
+    control,
+    formState: { errors },
+  } = useFormContext<AppointmentSchema>();
+
+  const specialityInput = watch("speciality");
+  const dateInput = watch("selectedDate");
+
+  const { occupiedTimes } = useSpecialities(specialityInput, dateInput);
 
   return (
     <div className="flex flex-col flex-1 px-60 py-12 gap-10">
@@ -29,12 +45,18 @@ export default function AppointmentDetails() {
           className="w-64 bg-transparent outline-none"
           {...register("speciality")}
         >
+          <option value="default">Selecione uma opção</option>
           {specialities?.map((speciality) => (
             <option key={speciality.id} value={speciality.id}>
               {speciality.name}
             </option>
           ))}
         </select>
+        {errors.speciality && (
+          <p className="text-red-500 mt-2 text-sm">
+            {errors.speciality.message}
+          </p>
+        )}
       </div>
       <div className="gap-5">
         <h2 className="font-bold text-xl">Valor da Consulta</h2>
@@ -43,6 +65,11 @@ export default function AppointmentDetails() {
       <div className="gap-5">
         <h2 className="font-bold text-xl">Selecione uma data</h2>
         <input type="date" {...register("selectedDate")} />
+        {errors.selectedDate && (
+          <p className="text-red-500 mt-2 text-sm">
+            {errors.selectedDate.message}
+          </p>
+        )}
       </div>
       <div className="flex flex-col gap-4 ">
         <h2 className="font-bold text-xl">Selecione um horário</h2>
@@ -57,10 +84,13 @@ export default function AppointmentDetails() {
                   key={time}
                   onClick={() => field.onChange(time)}
                   className={`${
-                    field.value === time
+                    occupiedTimes.includes(time)
+                      ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      : field.value === time
                       ? "bg-blue-500 text-white"
                       : "bg-white text-black"
                   } rounded-xl py-1 px-3 border border-gray-300 focus:outline-none`}
+                  disabled={occupiedTimes.includes(time)}
                 >
                   {time}
                 </button>
@@ -68,6 +98,9 @@ export default function AppointmentDetails() {
             </div>
           )}
         />
+        {errors.time && (
+          <p className="text-red-500 mt-2 text-sm">{errors.time.message}</p>
+        )}
       </div>
     </div>
   );
