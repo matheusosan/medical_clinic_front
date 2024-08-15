@@ -1,3 +1,5 @@
+import { ErrorResponseDTO } from "./../dtos/error.response.dto";
+
 export interface Costumer {
   id?: number;
   name: string;
@@ -7,14 +9,22 @@ export interface Costumer {
   birthDate: string;
 }
 
-export const findCostumerByCpf = async (cpf: string): Promise<Costumer> => {
+export const findCostumerByCpf = async (cpf: string) => {
   const res = await fetch(`http://localhost:8080/client/cpf/${cpf}`);
+  if (!res.ok) {
+    const errorData: ErrorResponseDTO = {
+      message: `Error: ${res.statusText}`,
+      statusCode: res.status,
+    };
+    return errorData;
+  }
+
   const data = await res.json();
   return data;
 };
 
 export const createClient = async (clientData: Costumer) => {
-  const res = await fetch("http://localhost:8080/client", {
+  await fetch("http://localhost:8080/client", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,6 +32,5 @@ export const createClient = async (clientData: Costumer) => {
     body: JSON.stringify(clientData),
   });
 
-  const data = res.json();
-  return data;
+  return;
 };
