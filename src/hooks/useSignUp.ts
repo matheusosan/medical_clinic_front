@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as z from "zod";
-import { createClient } from "../services/costumer.service";
+import { createClient } from "../api/services/costumer.service";
 import { toast } from "react-toastify";
 import { FORM_ERRORS_MESSAGES } from "../constants/form-errors";
 

@@ -1,8 +1,8 @@
-import { findCostumerByCpf } from "../services/costumer.service";
 import { useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { findCostumerByCpf } from "../api/services/costumer.service";
 
 const schema = z.object({
   cpf: z.string().min(11).max(11),
