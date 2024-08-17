@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
-import { useCostumer } from "../../../../hooks/useCostumer";
+import { useCpfForm } from "../../../../lib/hookform/hooks/useCpfForm";
+import { useGetClientByCpfQuery } from "../../../../lib/react-query/hooks/useGetClientByCpfQuery";
 
 export default function CustomerDetails() {
-  const { register, isError, isLoading, handleSubmit, onSubmit, client } =
-    useCostumer();
+  const { register, handleSubmit, errors, cpfInput } = useCpfForm();
+  const {
+    data: client,
+    isLoading: isClientLoading,
+    isError: isClientError,
+    refetch,
+  } = useGetClientByCpfQuery(cpfInput);
+
+  const onSubmit = () => {
+    if (!errors.cpf) {
+      refetch();
+    }
+  };
 
   return (
     <div className="flex flex-col flex-1 px-60 py-12 gap-10 border-r">
@@ -17,10 +29,11 @@ export default function CustomerDetails() {
             {...register("cpf")}
           />
           <button onClick={handleSubmit(onSubmit)}>
-            {isLoading ? "Buscando" : "Buscar"}
+            {isClientLoading ? "Buscando" : "Buscar"}
           </button>
         </div>
-        {isError && (
+        {errors.cpf && <p>{errors.cpf.message}</p>}
+        {isClientError && (
           <p className="">
             Cadastro não encontrado, cadastre-se{" "}
             <Link to={"/cadastrar"} className="text-blue-500">
@@ -30,7 +43,7 @@ export default function CustomerDetails() {
         )}
       </div>
 
-      {client && !isError && (
+      {client && !isClientError && (
         <>
           <div className="gap-5">
             <h2 className="font-bold text-xl">Nome</h2>
