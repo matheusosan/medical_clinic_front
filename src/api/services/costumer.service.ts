@@ -1,5 +1,3 @@
-import { ErrorResponseDTO } from "./../dtos/error.response.dto";
-
 export interface Costumer {
   id?: number;
   name: string;
@@ -12,25 +10,18 @@ export interface Costumer {
 export const findCostumerByCpf = async (cpf: string) => {
   const res = await fetch(`http://localhost:8080/client/cpf/${cpf}`);
   if (!res.ok) {
-    const errorData: ErrorResponseDTO = {
-      message: `Error: ${res.statusText}`,
-      statusCode: res.status,
-    };
-    return errorData;
+    throw new Error("Client not found");
   }
 
-  const data = await res.json();
-  return data;
+  return res.json();
 };
 
 export const createClient = async (clientData: Costumer) => {
-  await fetch("http://localhost:8080/client", {
+  return await fetch("http://localhost:8080/client", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(clientData),
   });
-
-  return;
 };
