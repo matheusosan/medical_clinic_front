@@ -1,10 +1,18 @@
-import Header from "../../components/Header";
 import { Link } from "react-router-dom";
-import { useSignup } from "../../hooks/useSignUp";
+import Header from "../../components/Header";
+import {
+  SignupSchema,
+  useSignupForm,
+} from "../../lib/hookform/hooks/useSignuForm";
+import { useSignupMutation } from "../../lib/react-query/hooks/useSignUpMutation";
 
-export default function Cadastrar() {
-  const { register, onSubmit, handleSubmit, errors, isSubmitting } =
-    useSignup();
+export default function Signup() {
+  const { errors, handleSubmit, isSubmitting, register } = useSignupForm();
+  const { mutate } = useSignupMutation();
+
+  const onSubmit = (data: SignupSchema) => {
+    mutate(data);
+  };
 
   return (
     <>
