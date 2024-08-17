@@ -1,22 +1,39 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import * as z from "zod";
 import Header from "../../components/Header";
-import { useAppointment } from "../../hooks/useAppointment";
+import { useCpfForm } from "../../lib/hookform/hooks/useCpfForm";
+import { useCreateAppointmentMutation } from "../../lib/react-query/hooks/useCreateAppointmentMutation";
+import { useGetClientByCpfQuery } from "../../lib/react-query/hooks/useGetClientByCpfQuery";
 import AppointmentDetails from "./components/AppointmentDetails";
 import CustomerDetails from "./components/CustomerDetails";
-import {
-  appointmentSchema,
-  AppointmentSchema,
-} from "./schemas/appointment.schema";
+
+const schema = z.object({
+  speciality: z.string().refine((value) => value !== "default", {
+    message: "Selecione uma opção válida",
+  }),
+  selectedDate: z.string().date("Selecione uma data para consulta"),
+  time: z.string().refine((value) => value !== "", {
+    message: "Selecione um horário",
+  }),
+});
+
+export type AppointmentSchema = z.infer<typeof schema>;
 
 export default function Agendamento() {
   const methods = useForm<AppointmentSchema>({
     mode: "onChange",
-    resolver: zodResolver(appointmentSchema),
+    resolver: zodResolver(schema),
   });
 
-  const { onSubmit } = useAppointment();
+  const { cpfInput } = useCpfForm();
+  const { mutate } = useCreateAppointmentMutation();
+  const { data: client } = useGetClientByCpfQuery(cpfInput);
+
+  const onSubmit = (data: AppointmentSchema) => {
+    mutate({ data, clientId: client!.id! });
+  };
 
   return (
     <>
