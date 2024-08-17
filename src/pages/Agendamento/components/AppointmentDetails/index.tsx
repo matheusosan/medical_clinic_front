@@ -1,8 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import { Controller, useFormContext } from "react-hook-form";
-import { getAllServices } from "../../../../api/services/specialities.service";
-import { useSpecialities } from "../../../../hooks/useSpeciaities";
-import { AppointmentSchema } from "../../schemas/appointment.schema";
+import { AppointmentSchema } from "../..";
+import { useCheckScheduledTimes } from "../../../../hooks/useCheckScheduledTimes";
+import { useSpecialitiesQuery } from "../../../../lib/react-query/hooks/useSpecialitiesQuery";
 
 const horarios = [
   "09:00",
@@ -17,10 +16,7 @@ const horarios = [
 ];
 
 export default function AppointmentDetails() {
-  const { data: specialities } = useQuery({
-    queryKey: ["specialities"],
-    queryFn: () => getAllServices(),
-  });
+  const { data: specialities } = useSpecialitiesQuery();
 
   const {
     register,
@@ -32,7 +28,7 @@ export default function AppointmentDetails() {
   const specialityInput = watch("speciality");
   const dateInput = watch("selectedDate");
 
-  const { occupiedTimes } = useSpecialities(specialityInput, dateInput);
+  const { occupiedTimes } = useCheckScheduledTimes(specialityInput, dateInput);
 
   return (
     <div className="flex flex-col flex-1 px-60 py-12 gap-10">
