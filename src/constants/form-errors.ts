@@ -4,4 +4,5 @@ export const FORM_ERRORS_MESSAGES = {
   CPF: "Digite um CPF válido",
   PHONENUMBER: "Digite um número de telefone válido",
   EMAIL: "Digite um email válido",
+  PASSWORD: "A senha deve conter no mínimo 6 dígitos",
 };
