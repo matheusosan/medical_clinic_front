@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { UserRound } from "lucide-react";
 import { Link } from "react-router-dom";
 import LOGO from "/LOGO.png";
 
@@ -24,7 +25,7 @@ export default function Header() {
         </a>
       </nav>
 
-      <div className="flex gap-4">
+      <div className="flex items-center gap-4">
         <Link
           to={"/agendamento"}
           className="rounded-xl px-6 py-2 text-white font-bold bg-[#0B4FFF]"
@@ -37,6 +38,9 @@ export default function Header() {
           className="rounded-xl px-6 py-2 text-[#0B4fff] font-bold border border-[#0B4FFF]"
         >
           Cadastrar-se
+        </Link>
+        <Link to={"/perfil"}>
+          <UserRound className="h-8 w-8 text-[#0B4FFF]" />
         </Link>
       </div>
     </motion.header>
