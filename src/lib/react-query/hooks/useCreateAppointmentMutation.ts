@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createAppointment } from "../../../api/services/appointment.service";
+import { ErrorResponseDTO } from "./../../../api/dtos/error.response.dto";
 import { AppointmentSchema } from "./../../../pages/Agendamento/index";
 
 export const useCreateAppointmentMutation = () => {
@@ -25,12 +26,12 @@ export const useCreateAppointmentMutation = () => {
 
         queryClient.removeQueries({ queryKey: ["costumer"] });
       } else {
-        response.json().then((errorData) => {
+        response.json().then((errorData: ErrorResponseDTO) => {
           toast.error(`Ocorreu um erro: ${errorData.message}`);
         });
       }
     },
-    onError: (error: any) => {
+    onError: (error: ErrorResponseDTO) => {
       toast.error(`Ocorreu um erro: ${error.message || "Erro desconhecido"}`);
     },
   });
