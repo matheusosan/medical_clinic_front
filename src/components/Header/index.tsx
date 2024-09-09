@@ -5,7 +5,7 @@ import LOGO from "/LOGO.png";
 
 export default function Header() {
   return (
-    <motion.header className="flex items-center justify-between px-[15%] w-full h-[12vh] fixed bg-white top-0 z-50">
+    <motion.header className="flex items-center justify-between px-[15%] w-full h-[12vh] bg-white z-50">
       <Link to={"/"} className="font-bold">
         <img src={LOGO} alt="" className="w-10 h-10" />
       </Link>
