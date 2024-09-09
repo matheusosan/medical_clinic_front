@@ -1,4 +1,4 @@
-import { AppointmentSchema } from "./../../pages/Agendamento/schemas/appointment.schema";
+import { AppointmentSchema } from "./../../../pages/Agendamento/index";
 
 export const createAppointment = async (
   formData: AppointmentSchema,
@@ -8,6 +8,7 @@ export const createAppointment = async (
     dataAgendada: `${formData.selectedDate}T${formData.time}:00.123Z`,
     serviceId: formData.speciality,
     clientId: clientId,
+    status: "SCHEDULED",
   };
 
   return await fetch(`http://localhost:8080/appointment`, {
@@ -17,18 +18,4 @@ export const createAppointment = async (
     },
     body: JSON.stringify(requestBody),
   });
-};
-
-export const fetchOccupiedTimes = async (
-  dateInput: string,
-  specialityInput: string
-) => {
-  const response = await fetch(
-    `http://localhost:8080/appointment/date?date=${dateInput}&serviceId=${specialityInput}`
-  );
-  const data = await response.json();
-
-  return data.map((appointment: { dataAgendada: string }) =>
-    appointment.dataAgendada.substring(11, 16)
-  );
 };

@@ -1,0 +1,1 @@
+export { getAllServices } from "./getAllServices";
