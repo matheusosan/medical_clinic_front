@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <section
       id="home"
-      className="flex items-center home-background w-full h-[70vh] px-6 lg:px-[15%] text-white"
+      className="flex items-center home-background w-full h-[60vh] md:h-[70vh] px-6 lg:px-[15%] text-white"
     >
       <motion.div
         initial={{ opacity: 0, x: -100 }}
@@ -25,7 +25,7 @@ export default function Home() {
         <Link
           data-testid="btn"
           to={"/agendamento"}
-          className="flex items-center justify-center w-64 lg:w-[325px] h-[70px] rounded-3xl text-md lg:text-xl font-bold bg-[#0B4FFF] outline-none text-white"
+          className="flex items-center justify-center text-center md:text-left w-40 lg:w-[325px] h-[50px] md:h-[70px] rounded-3xl text-sm lg:text-xl font-bold bg-[#0B4FFF] outline-none text-white"
         >
           FAÇA SEU AGENDAMENTO
         </Link>

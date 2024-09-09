@@ -1,7 +1,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { AppointmentSchema } from "../..";
 import { useCheckScheduledTimes } from "../../../../hooks/useCheckScheduledTimes";
-import { useSpecialitiesQuery } from "../../../../lib/react-query/hooks/useSpecialitiesQuery";
+import { useSpecialitiesQuery } from "../../../../lib/react-query/queries/useSpecialitiesQuery";
 
 const horarios = [
   "09:00",
@@ -31,14 +31,14 @@ export default function AppointmentDetails() {
   const { occupiedTimes } = useCheckScheduledTimes(specialityInput, dateInput);
 
   return (
-    <div className="flex flex-col flex-1 px-60 py-12 gap-10">
-      <div className="gap-5">
-        <h2 className="font-bold text-xl">
+    <div className="flex flex-col items-center md:items-start flex-1 md:px-60 pb-8 md:py-12 gap-8">
+      <div className="flex flex-col items-center gap-5">
+        <h2 className="font-bold text-xl text-center md:text-left px-12 md:px-0">
           Selecione a especialidade desejada
         </h2>
         <select
           role="search"
-          className="w-64 bg-transparent outline-none"
+          className="w-64 text-center md:text-left bg-transparent outline-none"
           {...register("speciality")}
         >
           <option value="default">Selecione uma opção</option>
@@ -54,20 +54,25 @@ export default function AppointmentDetails() {
           </p>
         )}
       </div>
-      <div className="gap-5">
+      <div className="flex flex-col text-center md:text-left gap-5">
         <h2 className="font-bold text-xl">Valor da Consulta</h2>
-        <p></p>
+        <p>R$99.90</p>
       </div>
-      <div className="gap-5">
+      <div className="flex flex-col items-center gap-5">
         <h2 className="font-bold text-xl">Selecione uma data</h2>
-        <input type="date" {...register("selectedDate")} />
+        <input
+          className="text-center md:text-left"
+          type="date"
+          placeholder="Selecione uma data"
+          {...register("selectedDate")}
+        />
         {errors.selectedDate && (
           <p className="text-red-500 mt-2 text-sm">
             {errors.selectedDate.message}
           </p>
         )}
       </div>
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col items-center md:items-start gap-4 ">
         <h2 className="font-bold text-xl">Selecione um horário</h2>
         <Controller
           name="time"
@@ -85,7 +90,7 @@ export default function AppointmentDetails() {
                       : field.value === time
                       ? "bg-blue-500 text-white"
                       : "bg-white text-black"
-                  } rounded-xl py-1 px-3 border border-gray-300 focus:outline-none`}
+                  } rounded-xl py-1 px-6 text-center border border-gray-300 focus:outline-none`}
                   disabled={occupiedTimes.includes(time)}
                 >
                   {time}

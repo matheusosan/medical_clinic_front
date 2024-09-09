@@ -1,6 +1,7 @@
+import { LoaderCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCpfForm } from "../../../../lib/hookform/hooks/useCpfForm";
-import { useGetClientByCpfQuery } from "../../../../lib/react-query/hooks/useGetClientByCpfQuery";
+import { useGetClientByCpfQuery } from "../../../../lib/react-query/queries/useGetClientByCpfQuery";
 
 export default function CustomerDetails() {
   const { register, handleSubmit, errors, cpfInput } = useCpfForm();
@@ -18,8 +19,8 @@ export default function CustomerDetails() {
   };
 
   return (
-    <div className="flex flex-col flex-1 px-60 py-12 gap-10 border-r">
-      <div className="flex flex-col gap-5">
+    <div className="flex flex-col items-center md:items-start flex-1 md:px-60 py-12 gap-10 border-r">
+      <div className="flex flex-col items-center md:items-start gap-5">
         <h2 className="font-bold text-xl">Informe seu CPF</h2>
         <div className="flex items-center gap-2">
           <input
@@ -29,7 +30,11 @@ export default function CustomerDetails() {
             {...register("cpf")}
           />
           <button onClick={handleSubmit(onSubmit)}>
-            {isClientLoading ? "Buscando" : "Buscar"}
+            {isClientLoading ? (
+              <LoaderCircle className="animate-spin" />
+            ) : (
+              "Buscar"
+            )}
           </button>
         </div>
         {errors.cpf && <p>{errors.cpf.message}</p>}
@@ -45,23 +50,23 @@ export default function CustomerDetails() {
 
       {client && !isClientError && (
         <>
-          <div className="gap-5">
+          <div className="flex flex-col items-center md:items-start gap-2 md:gap-5">
             <h2 className="font-bold text-xl">Nome</h2>
             <p>{client ? client.name : ""}</p>
           </div>
 
-          <div className="gap-5">
+          <div className="flex flex-col items-center md:items-start gap-2 md:gap-5">
             <h2 className="font-bold text-xl">Email</h2>
             <p>{client ? client.email : ""}</p>
           </div>
 
-          <div className="gap-5">
+          <div className="flex flex-col items-center md:items-start gap-2 md:gap-5">
             <h2 className="font-bold text-xl">Telefone</h2>
             {client ? client.phoneNumber : ""}
           </div>
 
-          <div className="gap-5">
-            <h2 className="font-bold text-xl">Data de Nascimento</h2>
+          <div className="flex flex-col items-center md:items-start gap-2 md:gap-5">
+            <h2 className="font-bold text-xl">Data de nascimento</h2>
             {client ? client.birthDate : ""}
           </div>
         </>

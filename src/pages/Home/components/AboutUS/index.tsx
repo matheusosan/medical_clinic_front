@@ -3,11 +3,14 @@ import About from "/ABOUT_US.png";
 
 export default function AboutUs() {
   return (
-    <section id="sobre" className="flex justify-center gap-24">
+    <section
+      id="sobre"
+      className="flex-col flex md:flex-row justify-center gap-12 md:gap-24"
+    >
       <motion.img src={About} alt="" />
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col px-6 md:px-0 gap-6">
         <h2 className="font-extrabold text-[#0B4FFF] text-4xl">SOBRE NÓS</h2>
-        <p className="w-[540px]">
+        <p className="md:w-[540px]">
           Na <span className="text-[#0B4FFF] font-bold">Medical Clinic</span>{" "}
           nossa missão é oferecer cuidados de saúde excepcionais, com um
           compromisso inabalável com a excelência e o bem-estar dos nossos
