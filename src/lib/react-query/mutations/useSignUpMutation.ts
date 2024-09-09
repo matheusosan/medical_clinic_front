@@ -1,11 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { ErrorResponseDTO } from "./../../../api/dtos/error.response.dto";
-import {
-  Costumer,
-  createClient,
-} from "./../../../api/services/costumer.service";
+import { ErrorResponseDTO } from "../../../api/dtos/error.response.dto";
+import { Costumer, createClient } from "../../../api/services/costumer";
 
 export const useSignupMutation = () => {
   const navigate = useNavigate();

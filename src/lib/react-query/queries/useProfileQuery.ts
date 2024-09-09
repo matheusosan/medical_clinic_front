@@ -1,8 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  ClientResponseDTO,
-  getProfile,
-} from "../../../api/services/costumer.service";
+import { ClientResponseDTO, getProfile } from "../../../api/services/costumer";
 import { QUERY_KEYS } from "../query-keys";
 
 export const useProfileQuery = () => {
@@ -10,5 +7,6 @@ export const useProfileQuery = () => {
     queryKey: [QUERY_KEYS.PROFILE],
     queryFn: getProfile,
     retry: false,
+    refetchOnMount: true,
   });
 };

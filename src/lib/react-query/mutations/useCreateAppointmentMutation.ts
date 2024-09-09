@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createAppointment } from "../../../api/services/appointment.service";
-import { ErrorResponseDTO } from "./../../../api/dtos/error.response.dto";
-import { AppointmentSchema } from "./../../../pages/Agendamento/index";
+import { ErrorResponseDTO } from "../../../api/dtos/error.response.dto";
+import { createAppointment } from "../../../api/services/appointment";
+import { AppointmentSchema } from "../../../pages/Agendamento/index";
 
 export const useCreateAppointmentMutation = () => {
   const navigate = useNavigate();

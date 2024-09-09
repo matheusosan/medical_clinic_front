@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Login } from "./../../../api/services/auth.service";
+import { Login } from "../../../api/services/auth";
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -16,6 +16,7 @@ export const useLoginMutation = () => {
         Cookies.set("access_token", token, {
           secure: true,
           sameSite: "strict",
+          expires: 1,
         });
         navigate("/");
         toast.success("Login realizado com sucesso!");
@@ -23,7 +24,7 @@ export const useLoginMutation = () => {
         toast.error("Token não encontrado na resposta do servidor.");
       }
     },
-    onError: (error: any) => {
+    onError: (error) => {
       toast.error(`Ocorreu um erro: ${error.message || "Erro desconhecido"}`);
     },
   });

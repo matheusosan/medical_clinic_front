@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { findCostumerByCpf } from "../../../api/services/costumer.service";
+import { findCostumerByCpf } from "../../../api/services/costumer";
 import { QUERY_KEYS } from "../query-keys";
 
 interface Costumer {
