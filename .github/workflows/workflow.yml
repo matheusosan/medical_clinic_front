@@ -1,0 +1,21 @@
+name: CI Workflow
+on:
+  push:
+    branches:
+      - main
+jobs:
+  CI-Worflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Node
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+      - run: npm install
+      - name: Run tests and build
+      - run: npm run test
+      - run: npm run build
+        
+      
