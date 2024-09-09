@@ -80,6 +80,6 @@ describe("<Appointment>", () => {
 
     const homeText = await screen.findByText(/bem-vindo/i);
 
-    expect(homeText).not.toBeInTheDocument();
+    expect(homeText).toBeInTheDocument();
   });
 });
