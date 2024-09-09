@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchOccupiedTimes } from "../api/services/appointment.service";
+import { fetchOccupiedTimes } from "../api/services/appointment";
 
 export const useCheckScheduledTimes = (
   specialityInput: string,
