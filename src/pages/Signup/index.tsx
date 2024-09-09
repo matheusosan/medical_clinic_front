@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
-import Camera from "../../components/Camera";
 import Header from "../../components/Header";
 import {
   SignupSchema,
   useSignupForm,
 } from "../../lib/hookform/hooks/useSignuForm";
-import { useSignupMutation } from "../../lib/react-query/hooks/useSignUpMutation";
+import { useSignupMutation } from "../../lib/react-query/mutations/useSignUpMutation";
 
 export default function Signup() {
   const { errors, handleSubmit, isSubmitting, register } = useSignupForm();
@@ -18,8 +17,8 @@ export default function Signup() {
   return (
     <>
       <Header />
-      <main className="flex flex-col items-center w-full min-h-screen mt-24 py-8">
-        <h2 className="text-4xl font-extrabold">
+      <main className="flex flex-col items-center w-full min-h-screen py-8">
+        <h2 className="text-2xl md:text-4xl font-extrabold">
           Realize seu <span className="text-[#0b4fff]">Cadastro</span>
         </h2>
 
@@ -72,6 +71,20 @@ export default function Signup() {
               )}
             </div>
             <div className="flex flex-col">
+              <label className="text-sm font-bold">Senha</label>
+              <input
+                {...register("password")}
+                className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
+                type="password"
+                placeholder="Crie uma senha"
+              />
+              {errors.password?.message && (
+                <p className="text-red-500 mt-2 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col">
               <label className="text-sm font-bold">Número de telefone</label>
               <input
                 {...register("phoneNumber")}
@@ -112,7 +125,6 @@ export default function Signup() {
               </button>
             </div>
           </form>
-          <Camera />
         </div>
       </main>
     </>

@@ -10,6 +10,7 @@ const schema = z.object({
     .string()
     .min(11, FORM_ERRORS_MESSAGES.CPF)
     .max(11, FORM_ERRORS_MESSAGES.CPF),
+  password: z.string().min(6, FORM_ERRORS_MESSAGES.PASSWORD),
   phoneNumber: z
     .string()
     .min(10, FORM_ERRORS_MESSAGES.PHONENUMBER)
