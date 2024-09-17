@@ -1,10 +1,10 @@
-import Cookies from "js-cookie";
+import { getToken } from "./../../../utils/token-util";
 
 export const getAllAppointmentsByClient = async (
   userId: number,
   sortBy: string
 ) => {
-  const token = Cookies.get("access_token");
+  const token = getToken();
 
   if (!token) {
     throw new Error("Token não encontrado");

@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+import { getToken } from "../../../utils/token-util";
 
 export interface ClientResponseDTO {
   id: number;
@@ -11,8 +11,7 @@ export interface ClientResponseDTO {
 }
 
 export const getProfile = async (): Promise<ClientResponseDTO> => {
-  const token = Cookies.get("access_token");
-  console.log(token);
+  const token = getToken();
 
   if (!token) {
     throw new Error("Token não encontrado");
