@@ -21,7 +21,7 @@ export const useLoginMutation = () => {
         navigate("/");
         toast.success("Login realizado com sucesso!");
       } else {
-        toast.error("Token não encontrado na resposta do servidor.");
+        toast.error("Credenciais inválidas.");
       }
     },
     onError: (error) => {
