@@ -2,9 +2,10 @@ import { LoaderCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCpfForm } from "../../../../lib/hookform/hooks/useCpfForm";
 import { useGetClientByCpfQuery } from "../../../../lib/react-query/queries/useGetClientByCpfQuery";
+import { cpfMask } from "../../../../utils/input-masks";
 
 export default function CustomerDetails() {
-  const { register, handleSubmit, errors, cpfInput } = useCpfForm();
+  const { register, handleSubmit, setValue, errors, cpfInput } = useCpfForm();
   const {
     data: client,
     isLoading: isClientLoading,
@@ -28,6 +29,11 @@ export default function CustomerDetails() {
             placeholder="Digite seu CPF"
             className="w-32 border-b focus:outline-none"
             {...register("cpf")}
+            onChange={(e) => {
+              const maskedValue = cpfMask(e.target.value);
+              setValue("cpf", maskedValue);
+            }}
+            maxLength={14}
           />
           <button onClick={handleSubmit(onSubmit)}>
             {isClientLoading ? (
