@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useProfileQuery } from "../lib/react-query/queries/useProfileQuery";
+import { getToken } from "../utils/token-util";
 
 export const useAuth = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ export const useAuth = () => {
     error,
     isLoading: isUserLoading,
   } = useProfileQuery();
-  const token = Cookies.get("access_token");
+  const token = getToken();
 
   const userId = userData?.id;
 

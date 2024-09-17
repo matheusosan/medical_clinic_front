@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import Profile from ".";
@@ -7,11 +6,12 @@ import {
   profileResponse,
 } from "../../mocks/responses/profileResponse";
 import { render, screen } from "../../utils/test-utils";
+import { removeToken, setToken } from "../../utils/token-util";
 import Login from "../Login";
 
 describe("<Profile>", () => {
   it("should display user data and appointments correctly", async () => {
-    Cookies.set("access_token", "valid_token");
+    setToken("access_token", "valid_token");
 
     render(
       <MemoryRouter initialEntries={["/profile"]}>
@@ -39,7 +39,7 @@ describe("<Profile>", () => {
   });
 
   it("should redirect to login if token was invalid or don't exists", async () => {
-    Cookies.remove("access_token");
+    removeToken("access_token");
 
     render(
       <MemoryRouter initialEntries={["/profile"]}>
