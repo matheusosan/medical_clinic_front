@@ -1,5 +1,9 @@
 import { http, HttpResponse } from "msw";
 import { cpfNotFound, user, validCpf } from "./responses/clientByCpfResponse";
+import {
+  profileAppointmentsResponse,
+  profileResponse,
+} from "./responses/profileResponse";
 import { specialitiesResponse } from "./responses/specialitiesResponse";
 
 export const handlers = [
@@ -42,5 +46,22 @@ export const handlers = [
       response: "Consulta agendada com sucesso!",
       status: "201",
     });
+  }),
+
+  http.get("http://localhost:8080/client/profile", () => {
+    return HttpResponse.json(profileResponse);
+  }),
+
+  http.get(`http://localhost:8080/appointment/client/1`, ({ request }) => {
+    const url = new URL(request.url);
+    const sortBy = url.searchParams.get("sortBy");
+    if (sortBy === "newest") {
+      const sortedResponse = profileAppointmentsResponse.sort((a, b) => {
+        return a.service.name.localeCompare(b.service.name);
+      });
+      return HttpResponse.json(sortedResponse);
+    }
+
+    return HttpResponse.json(profileAppointmentsResponse);
   }),
 ];
