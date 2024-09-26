@@ -8,13 +8,13 @@ import HomePage from "../Home";
 const newUser = {
   name: "teste1",
   birthDate: "2000-01-01",
-  cpf: "99999999999",
+  cpf: "999.999.999-99",
   password: "123456",
   phoneNumber: "51999999999",
   email: "mail@mail.com",
 };
 
-describe("<Agendamento>", () => {
+describe("<Signup>", () => {
   it("should create a user correctly", async () => {
     render(
       <MemoryRouter initialEntries={["/cadastrar"]}>

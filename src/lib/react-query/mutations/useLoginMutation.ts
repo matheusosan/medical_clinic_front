@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Login } from "../../../api/services/auth";
+import { setToken } from "../../../utils/token-util";
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
@@ -13,15 +13,15 @@ export const useLoginMutation = () => {
       const token = data.token;
 
       if (token) {
-        Cookies.set("access_token", token, {
+        setToken("access_token", token, {
           secure: true,
-          sameSite: "strict",
+          sameSite: "Strict",
           expires: 1,
         });
         navigate("/");
         toast.success("Login realizado com sucesso!");
       } else {
-        toast.error("Token não encontrado na resposta do servidor.");
+        toast.error("Credenciais inválidas.");
       }
     },
     onError: (error) => {

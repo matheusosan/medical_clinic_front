@@ -5,8 +5,8 @@ import * as z from "zod";
 const schema = z.object({
   cpf: z
     .string()
-    .min(11, "Digite um CPF válido")
-    .max(11, "Digite um CPF válido"),
+    .min(14, "Digite um CPF válido")
+    .max(14, "Digite um CPF válido"),
 });
 
 type CpfSchema = z.infer<typeof schema>;
@@ -16,6 +16,7 @@ export const useCpfForm = () => {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<CpfSchema>({
     resolver: zodResolver(schema),
@@ -28,5 +29,6 @@ export const useCpfForm = () => {
     cpfInput,
     register,
     handleSubmit,
+    setValue,
   };
 };

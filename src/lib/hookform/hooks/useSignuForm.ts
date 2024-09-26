@@ -8,8 +8,8 @@ const schema = z.object({
   birthDate: z.string().date(FORM_ERRORS_MESSAGES.BIRTHDATE),
   cpf: z
     .string()
-    .min(11, FORM_ERRORS_MESSAGES.CPF)
-    .max(11, FORM_ERRORS_MESSAGES.CPF),
+    .min(14, FORM_ERRORS_MESSAGES.CPF)
+    .max(14, FORM_ERRORS_MESSAGES.CPF),
   password: z.string().min(6, FORM_ERRORS_MESSAGES.PASSWORD),
   phoneNumber: z
     .string()
@@ -24,6 +24,7 @@ export const useSignupForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<SignupSchema>({
     resolver: zodResolver(schema),
@@ -32,6 +33,7 @@ export const useSignupForm = () => {
   return {
     register,
     handleSubmit,
+    setValue,
     errors,
     isSubmitting,
   };

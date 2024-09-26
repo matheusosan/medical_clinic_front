@@ -5,9 +5,11 @@ import {
   useSignupForm,
 } from "../../lib/hookform/hooks/useSignuForm";
 import { useSignupMutation } from "../../lib/react-query/mutations/useSignUpMutation";
+import { cpfMask } from "../../utils/input-masks";
 
 export default function Signup() {
-  const { errors, handleSubmit, isSubmitting, register } = useSignupForm();
+  const { errors, handleSubmit, isSubmitting, register, setValue } =
+    useSignupForm();
   const { mutate } = useSignupMutation();
 
   const onSubmit = (data: SignupSchema) => {
@@ -63,6 +65,10 @@ export default function Signup() {
                 className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
                 type="text"
                 placeholder="Digite seu CPF"
+                onChange={(e) => {
+                  const maskedValue = cpfMask(e.target.value);
+                  setValue("cpf", maskedValue);
+                }}
               />
               {errors.cpf?.message && (
                 <p className="text-red-500 mt-2 text-sm">
