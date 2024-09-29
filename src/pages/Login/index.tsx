@@ -1,4 +1,5 @@
-import { LoaderCircle } from "lucide-react";
+import { KeyRound, LoaderCircle, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import Header from "../../components/Header";
 import {
   LoginSchema,
@@ -17,59 +18,98 @@ function Login() {
 
   return (
     <>
-      <Header />
-      <main className="flex flex-col items-center w-full min-h-screen py-8">
-        <h2 className="text-2xl md:text-4xl font-extrabold">
-          Fazer <span className="text-[#0b4fff]">login</span>
-        </h2>
-
-        <form
-          data-testid="submit-btn"
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col p-12 mt-8 gap-6 rounded-xl border border-slate-200"
-        >
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold">E-mail</label>
-            <input
-              {...register("email")}
-              className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
-              type="text"
-              placeholder="Digite seu email"
-            />
-            {errors.email?.message && (
-              <p data-testid="error" className="text-red-500 mt-2 text-sm px-4">
-                {errors.email.message}
-              </p>
-            )}
-          </div>
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-bold">Senha</label>
-            <input
-              {...register("password")}
-              className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
-              type="password"
-              placeholder="Digite sua senha"
-            />
-            {errors.password?.message && (
-              <p className="text-red-500 mt-2 text-sm px-4">
-                {errors.password.message}
-              </p>
-            )}
-          </div>
-
-          <button
-            disabled={isDisabled}
-            className={`font-bold text-white h-12 py-2 px-6 rounded-lg bg-[#0B4FFF] ${
-              isDisabled ? "opacity-80 cursor-not-allowed" : ""
-            }`}
+      <main className="flex flex-col w-full h-screen">
+        <Header />
+        <div className="flex justify-center h-[70%] w-full">
+          <form
+            data-testid="submit-btn"
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col p-24 gap-10 rounded-xl"
           >
-            {isSubmitting ? (
-              <LoaderCircle className="animate-spin" />
-            ) : (
-              "Entrar"
-            )}
-          </button>
-        </form>
+            <h2 className="text-2xl md:text-4xl text-center font-extrabold text-[#0b4fff]">
+              Login
+            </h2>
+            <div className="flex flex-col gap-4">
+              <label className="text-sm font-bold">E-mail</label>
+              <div
+                className={`flex justify-between items-center border px-4 py-1 rounded-md ${
+                  errors.email ? "border-red-400" : ""
+                }`}
+              >
+                <input
+                  {...register("email")}
+                  className={`outline-none placeholder:text-sm ${
+                    errors.email
+                      ? "placeholder:text-red-400"
+                      : "placeholder:text-slate-600"
+                  }`}
+                  type="text"
+                  placeholder="Digite seu email"
+                />
+                <Mail
+                  className={`${
+                    errors.email ? "text-red-400" : "text-slate-600"
+                  }`}
+                  size={18}
+                />
+              </div>
+              {errors.email?.message && (
+                <p data-testid="error" className="text-red-500 text-sm">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+            <div className="flex flex-col gap-4">
+              <label className="text-sm font-bold">Senha</label>
+              <div
+                className={`flex justify-between items-center border px-4 py-1 rounded-md ${
+                  errors.password ? "border-red-400" : ""
+                }`}
+              >
+                <input
+                  {...register("password")}
+                  className={`outline-none placeholder:text-sm ${
+                    errors.password
+                      ? "placeholder:text-red-400"
+                      : "placeholder:text-slate-600"
+                  }`}
+                  type="password"
+                  placeholder="Digite sua senha"
+                />
+                <KeyRound
+                  className={` ${
+                    errors.password ? "text-red-400" : "text-slate-600"
+                  }`}
+                  size={18}
+                />
+              </div>
+              {errors.password?.message && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <button
+              disabled={isDisabled}
+              className={`font-bold text-white h-12 py-2 px-6 rounded-lg bg-[#0B4FFF] ${
+                isDisabled ? "opacity-80 cursor-not-allowed" : ""
+              }`}
+            >
+              {isSubmitting ? (
+                <LoaderCircle className="animate-spin" />
+              ) : (
+                "Entrar"
+              )}
+            </button>
+            <p>
+              Não possui cadastro? Cadastre-se{" "}
+              <Link className="text-[#0866FF]" to="/cadastrar">
+                aqui.
+              </Link>
+            </p>
+          </form>
+        </div>
       </main>
     </>
   );

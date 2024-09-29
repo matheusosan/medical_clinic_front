@@ -8,7 +8,6 @@ export const createAppointment = async (
     dataAgendada: `${formData.selectedDate}T${formData.time}:00.123Z`,
     serviceId: formData.speciality,
     clientId: clientId,
-    status: "SCHEDULED",
   };
 
   return await fetch(`http://localhost:8080/appointment`, {
