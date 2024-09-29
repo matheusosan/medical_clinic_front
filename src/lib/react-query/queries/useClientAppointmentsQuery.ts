@@ -5,7 +5,8 @@ import { QUERY_KEYS } from "../query-keys";
 export interface Data {
   id: number;
   dataAgendada: string;
-  status: string;
+  status: "CANCELADO" | "AGENDADO";
+  cancellationReason: string;
   service: Service;
 }
 
