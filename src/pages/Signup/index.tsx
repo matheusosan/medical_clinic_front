@@ -28,9 +28,9 @@ export default function Signup() {
           <form
             data-testid="submit-btn"
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-1 flex-col p-12 mt-8 gap-6 rounded-xl border border-slate-200"
+            className="flex w-[450px] flex-col p-12 mt-4 gap-6 rounded-xl "
           >
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-bold">Nome</label>
               <input
                 {...register("name")}
@@ -44,7 +44,7 @@ export default function Signup() {
                 </p>
               )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-bold">Data de nascimento</label>
               <input
                 {...register("birthDate")}
@@ -58,7 +58,7 @@ export default function Signup() {
                 </p>
               )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-bold">CPF</label>
               <input
                 {...register("cpf")}
@@ -76,7 +76,7 @@ export default function Signup() {
                 </p>
               )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-bold">Senha</label>
               <input
                 {...register("password")}
@@ -90,7 +90,7 @@ export default function Signup() {
                 </p>
               )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-bold">Número de telefone</label>
               <input
                 {...register("phoneNumber")}
@@ -104,7 +104,7 @@ export default function Signup() {
                 </p>
               )}
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
               <label className="text-sm font-bold">Email</label>
               <input
                 {...register("email")}
@@ -119,10 +119,10 @@ export default function Signup() {
               )}
             </div>
 
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between w-full gap-2">
               <Link
-                to="/"
-                className="flex items-center border border-[#0b4fff] h-12 py-2 px-6 rounded-lg text-[#0b4fff]"
+                to={"/"}
+                className="flex items-center justify-center font-bold h-12 py-2 px-6 rounded-lg text-[#0B4FFF] border border-[#0B4FFF]"
               >
                 Cancelar
               </Link>
