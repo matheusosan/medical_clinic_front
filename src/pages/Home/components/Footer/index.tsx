@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 flex items-center justify-end w-full pr-8">
+    <footer className="fixed bg-white bottom-0 flex items-center justify-end w-full pr-8 z-40">
       <p className="font-bold">
         Made by{" "}
         <a

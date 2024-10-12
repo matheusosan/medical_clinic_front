@@ -25,7 +25,7 @@ export default function Home() {
         <Link
           data-testid="btn"
           to={"/agendamento"}
-          className="flex items-center justify-center text-center md:text-left w-40 lg:w-[325px] h-[50px] md:h-[70px] rounded-3xl text-sm lg:text-xl font-bold bg-[#0B4FFF] outline-none text-white"
+          className="flex items-center justify-center text-center md:text-left w-40 lg:w-[325px] h-[50px] md:h-[70px] rounded-3xl text-sm lg:text-xl font-bold bg-[#0B4FFF] outline-none text-white button-hover"
         >
           FAÇA SEU AGENDAMENTO
         </Link>

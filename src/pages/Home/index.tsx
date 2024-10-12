@@ -6,7 +6,7 @@ import Specialities from "./components/Specialities";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen h-auto">
+    <main className="min-h-screen h-auto pb-12 md:pb-0">
       <Header />
       <Home />
       <Specialities />

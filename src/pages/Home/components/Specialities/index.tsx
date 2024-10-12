@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import Medic from "/MEDIC.png";
 
 const services = [
@@ -46,7 +45,7 @@ export default function Specialities() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 w-full gap-2 md:gap-0 md:w-[928px] h-auto md:h-[660px] ">
           {services.map((service) => (
-            <motion.div
+            <div
               key={service.name}
               className="flex flex-col items-center justify-center gap-3 w-[300px] h-auto py-6 md:py-0 md:h-[300px] border border-slate-300/75 rounded-xl px-4 cursor-pointer hover:scale-105 transition-transform"
             >
@@ -54,7 +53,7 @@ export default function Specialities() {
                 {service.name}
               </h2>
               <p className="leading-tight text-center">{service.description}</p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
