@@ -11,3 +11,7 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.button-hover {
+  @apply hover:scale-90 duration-200;
+}

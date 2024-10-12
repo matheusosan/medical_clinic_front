@@ -7,14 +7,17 @@ import "./index.css";
 import { router } from "./routes";
 
 import "react-toastify/dist/ReactToastify.css";
+import { SidebarProvider } from "./context";
 
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <ToastContainer />
+      <SidebarProvider>
+        <RouterProvider router={router} />
+        <ToastContainer />
+      </SidebarProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

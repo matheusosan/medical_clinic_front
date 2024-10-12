@@ -1,11 +1,15 @@
-import Cookies from "js-cookie";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import { useLayoutEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useProfileQuery } from "../lib/react-query/queries/useProfileQuery";
-import { getToken } from "../utils/token-util";
+import { QUERY_KEYS } from "../lib/react-query/query-keys";
+import { getToken, removeToken } from "../utils/token-util";
 
 export const useAuth = () => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const {
     data: userData,
     isError: isUserError,
@@ -16,13 +20,20 @@ export const useAuth = () => {
 
   const userId = userData?.id;
 
-  useEffect(() => {
-    if (!token || error) {
-      console.error("Erro de autenticação:", error);
-      Cookies.remove("access_token");
+  useLayoutEffect(() => {
+    if (location.pathname === "/perfil" && (!token || error)) {
+      removeToken("access_token");
       navigate("/login");
+      return;
     }
-  }, [token, isUserError, error, navigate]);
+  }, [token, error, navigate, location.pathname]);
 
-  return { userData, isUserError, isUserLoading, userId };
+  const logout = () => {
+    removeToken("access_token");
+    queryClient.resetQueries({
+      queryKey: [QUERY_KEYS.PROFILE],
+    });
+  };
+
+  return { userData, isUserError, isUserLoading, userId, logout, token };
 };
