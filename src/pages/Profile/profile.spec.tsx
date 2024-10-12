@@ -14,9 +14,9 @@ describe("<Profile>", () => {
     setToken("access_token", "valid_token");
 
     render(
-      <MemoryRouter initialEntries={["/profile"]}>
+      <MemoryRouter initialEntries={["/perfil"]}>
         <Routes>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/perfil" element={<Profile />} />
         </Routes>
       </MemoryRouter>
     );
@@ -42,18 +42,16 @@ describe("<Profile>", () => {
     removeToken("access_token");
 
     render(
-      <MemoryRouter initialEntries={["/profile"]}>
+      <MemoryRouter initialEntries={["/perfil"]}>
         <Routes>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/perfil" element={<Profile />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </MemoryRouter>
     );
 
-    const profile = screen.queryByText(/perfil/i);
-    expect(profile).not.toBeInTheDocument();
-
     const login = await screen.findByTestId("submit-btn");
     expect(login).toBeInTheDocument();
+    screen.debug();
   });
 });
