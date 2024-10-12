@@ -1,48 +1,57 @@
 import { motion } from "framer-motion";
-import { UserRound } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useSidebar } from "../../context";
+import { useAuth } from "../../hooks/useAuth";
+import Button from "../Button";
+import MobileSidebar from "../MobileSidebar";
+import NavigationLinks from "../NavigationLinks";
+import UserMenu from "../User";
 import LOGO from "/LOGO.png";
 
 export default function Header() {
+  const location = useLocation();
+  const { logout, token } = useAuth();
+  const { isOpen, toggleSidebar, setIsOpen } = useSidebar();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location, setIsOpen]);
+
   return (
-    <motion.header className="flex items-center justify-between px-[15%] w-full h-[12vh] bg-white z-50">
+    <motion.header className="flex items-center justify-between px-6 md:px-[15%] w-full h-[12vh] bg-white z-[100]">
       <Link to={"/"} className="font-bold">
         <img src={LOGO} alt="" className="w-10 h-10" />
       </Link>
 
-      <nav className="flex items-center justify-center gap-20">
-        <a className="font-bold" href="/#home">
-          Home
-        </a>
-        <a className="font-bold" href="/#especialidades">
-          Especialidades
-        </a>
-        <a className="font-bold" href="/#sobre">
-          Sobre Nós
-        </a>
-        <a className="font-bold" href="/#contato">
-          Contato
-        </a>
-      </nav>
+      <MobileSidebar
+        className={`md:hidden flex justify-between items-center py-12 flex-col z-50 gap-8 fixed top-0 left-0 h-full w-[75%] bg-white text-white transform transition-transform duration-300 ease-in-out ${
+          isOpen
+            ? "translate-x-0 shadow-xl shadow-black/30"
+            : "-translate-x-full"
+        }`}
+        isOpen={isOpen}
+      >
+        <NavigationLinks
+          className="flex w-full flex-col md:flex items-center justify-center md:gap-20"
+          linkClassName="w-full py-4 text-center text-[#0B4fff] md:text-black font-bold border-b"
+        />
+        <UserMenu className="flex flex-col" logout={logout} token={token} />
+      </MobileSidebar>
 
-      <div className="flex items-center gap-4">
-        <Link
-          to={"/agendamento"}
-          className="rounded-xl px-6 py-2 text-white font-bold bg-[#0B4FFF]"
-        >
-          Agendar
-        </Link>
+      <NavigationLinks
+        className="hidden md:flex md:gap-8"
+        linkClassName="md:font-bold md:hover:text-[#0B4FFF] transition-colors"
+      />
 
-        <Link
-          to={"/cadastrar"}
-          className="rounded-xl px-6 py-2 text-[#0B4fff] font-bold border border-[#0B4FFF]"
-        >
-          Cadastrar-se
-        </Link>
-        <Link to={"/perfil"}>
-          <UserRound className="h-8 w-8 text-[#0B4FFF]" />
-        </Link>
-      </div>
+      <UserMenu className="hidden" logout={logout} token={token} />
+
+      <Button
+        label={isOpen ? <X /> : <Menu />}
+        className="md:hidden"
+        onClick={() => toggleSidebar()}
+      />
     </motion.header>
   );
 }
