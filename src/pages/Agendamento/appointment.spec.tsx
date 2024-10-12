@@ -38,6 +38,8 @@ describe("<Appointment>", () => {
     expect(notFoundMessage).toBeInTheDocument();
     expect(specialityErrorMessage).toBeInTheDocument();
     expect(selectedDateErrorMessage).toBeInTheDocument();
+
+    screen.debug();
   });
 
   it("should create an appointment successfully", async () => {

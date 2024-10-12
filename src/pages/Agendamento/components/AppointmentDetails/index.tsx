@@ -1,7 +1,11 @@
-import { Controller, useFormContext } from "react-hook-form";
-import { AppointmentSchema } from "../..";
-import { useCheckScheduledTimes } from "../../../../hooks/useCheckScheduledTimes";
-import { useSpecialitiesQuery } from "../../../../lib/react-query/queries/useSpecialitiesQuery";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  UseFormRegister,
+} from "react-hook-form";
+import { Service } from "../../../../api/services/specialities/getAllServices";
+import { AppointmentSchema } from "../../hooks/useAppointment";
 
 const horarios = [
   "09:00",
@@ -15,21 +19,21 @@ const horarios = [
   "17:00",
 ];
 
-export default function AppointmentDetails() {
-  const { data: specialities } = useSpecialitiesQuery();
+interface AppointmentDetailsProps {
+  specialities: Service[] | undefined;
+  register: UseFormRegister<AppointmentSchema>;
+  control: Control<AppointmentSchema>;
+  errors: FieldErrors<AppointmentSchema>;
+  occupiedTimes: string[];
+}
 
-  const {
-    register,
-    watch,
-    control,
-    formState: { errors },
-  } = useFormContext<AppointmentSchema>();
-
-  const specialityInput = watch("speciality");
-  const dateInput = watch("selectedDate");
-
-  const { occupiedTimes } = useCheckScheduledTimes(specialityInput, dateInput);
-
+export default function AppointmentDetails({
+  control,
+  errors,
+  occupiedTimes,
+  register,
+  specialities,
+}: AppointmentDetailsProps) {
   return (
     <div className="flex flex-col items-center md:items-start flex-1 md:px-60 pb-8 md:py-12 gap-8">
       <div className="flex flex-col items-center gap-5">

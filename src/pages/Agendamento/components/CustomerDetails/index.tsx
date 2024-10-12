@@ -1,24 +1,35 @@
 import { LoaderCircle } from "lucide-react";
+import {
+  FieldErrors,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useCpfForm } from "../../../../lib/hookform/hooks/useCpfForm";
-import { useGetClientByCpfQuery } from "../../../../lib/react-query/queries/useGetClientByCpfQuery";
+import { Costumer } from "../../../../api/services/costumer";
 import { cpfMask } from "../../../../utils/input-masks";
+import type { AppointmentSchema } from "../../hooks/useAppointment";
 
-export default function CustomerDetails() {
-  const { register, handleSubmit, setValue, errors, cpfInput } = useCpfForm();
-  const {
-    data: client,
-    isLoading: isClientLoading,
-    isError: isClientError,
-    refetch,
-  } = useGetClientByCpfQuery(cpfInput);
+interface CustomerDetailsProps {
+  client: Costumer | undefined;
+  isClientLoading: boolean;
+  isClientError: boolean;
+  register: UseFormRegister<AppointmentSchema>;
+  setValue: UseFormSetValue<AppointmentSchema>;
+  handleSubmit: UseFormHandleSubmit<AppointmentSchema>;
+  onSubmitCpf: () => void;
+  errors: FieldErrors<AppointmentSchema>;
+}
 
-  const onSubmit = () => {
-    if (!errors.cpf) {
-      refetch();
-    }
-  };
-
+export default function CustomerDetails({
+  client,
+  isClientLoading,
+  isClientError,
+  register,
+  setValue,
+  onSubmitCpf,
+  errors,
+}: CustomerDetailsProps) {
   return (
     <div className="flex flex-col items-center md:items-start flex-1 md:px-60 py-12 gap-10 border-r">
       <div className="flex flex-col items-center md:items-start gap-5">
@@ -35,7 +46,7 @@ export default function CustomerDetails() {
             }}
             maxLength={14}
           />
-          <button onClick={handleSubmit(onSubmit)}>
+          <button type="button" onClick={onSubmitCpf}>
             {isClientLoading ? (
               <LoaderCircle className="animate-spin" />
             ) : (

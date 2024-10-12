@@ -1,4 +1,4 @@
-import { AppointmentSchema } from "./../../../pages/Agendamento/index";
+import { AppointmentSchema } from "../../../pages/Agendamento/hooks/useAppointment";
 
 export const createAppointment = async (
   formData: AppointmentSchema,

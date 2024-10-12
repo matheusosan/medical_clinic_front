@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ErrorResponseDTO } from "../../../api/dtos/error.response.dto";
 import { createAppointment } from "../../../api/services/appointment";
-import { AppointmentSchema } from "../../../pages/Agendamento/index";
+import { AppointmentSchema } from "./../../../pages/Agendamento/hooks/useAppointment";
 
 export const useCreateAppointmentMutation = () => {
   const navigate = useNavigate();

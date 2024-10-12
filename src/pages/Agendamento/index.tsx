@@ -1,40 +1,25 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import * as z from "zod";
+import Button from "../../components/Button";
 import Header from "../../components/Header";
-import { FORM_ERRORS_MESSAGES } from "../../constants/form-errors";
-import { useCpfForm } from "../../lib/hookform/hooks/useCpfForm";
-import { useCreateAppointmentMutation } from "../../lib/react-query/mutations/useCreateAppointmentMutation";
-import { useGetClientByCpfQuery } from "../../lib/react-query/queries/useGetClientByCpfQuery";
 import AppointmentDetails from "./components/AppointmentDetails";
 import CustomerDetails from "./components/CustomerDetails";
-
-const schema = z.object({
-  speciality: z.string().refine((value) => value !== "default", {
-    message: FORM_ERRORS_MESSAGES.SPECIALITY,
-  }),
-  selectedDate: z.string().date(FORM_ERRORS_MESSAGES.APPOINTMENT_SELECTED_DATE),
-  time: z.string().refine((value) => value !== "", {
-    message: "Selecione um horário",
-  }),
-});
-
-export type AppointmentSchema = z.infer<typeof schema>;
+import { useAppointment } from "./hooks/useAppointment";
 
 export default function Agendamento() {
-  const methods = useForm<AppointmentSchema>({
-    mode: "onChange",
-    resolver: zodResolver(schema),
-  });
-
-  const { cpfInput } = useCpfForm();
-  const { mutate } = useCreateAppointmentMutation();
-  const { data: client } = useGetClientByCpfQuery(cpfInput);
-
-  const onSubmit = (data: AppointmentSchema) => {
-    mutate({ data, clientId: client!.id! });
-  };
+  const {
+    isClientError,
+    isClientLoading,
+    client,
+    control,
+    errors,
+    occupiedTimes,
+    specialities,
+    handleSubmit,
+    onSubmit,
+    onSubmitCpf,
+    register,
+    setValue,
+  } = useAppointment();
 
   return (
     <>
@@ -44,32 +29,44 @@ export default function Agendamento() {
           Agende sua <span className="text-[#0B4FFF]">consulta</span>
         </h2>
 
-        <FormProvider {...methods}>
-          <form
-            id="appointment"
-            className="flex flex-col md:flex-row border border-slate-200 rounded-xl w-full"
-            onSubmit={methods.handleSubmit(onSubmit)}
-          >
-            <CustomerDetails />
-            <AppointmentDetails />
-          </form>
+        <form
+          id="appointment"
+          className="flex flex-col md:flex-row border border-slate-200 rounded-xl w-full"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <CustomerDetails
+            client={client}
+            errors={errors}
+            handleSubmit={handleSubmit}
+            isClientError={isClientError}
+            isClientLoading={isClientLoading}
+            onSubmitCpf={onSubmitCpf}
+            register={register}
+            setValue={setValue}
+          />
+          <AppointmentDetails
+            control={control}
+            errors={errors}
+            occupiedTimes={occupiedTimes}
+            register={register}
+            specialities={specialities}
+          />
+        </form>
 
-          <div className="flex flex-col md:flex-row w-full justify-between">
-            <Link
-              to={"/"}
-              className="px-12 py-4 text-sm font-bold md:rounded-xl text-center bg-[#c6131b] text-white md:shadow-[#9c9c9c] md:shadow-lg"
-            >
-              CANCELAR
-            </Link>
-            <button
-              className="px-12 py-4 text-sm font-bold md:rounded-xl text-center bg-[#22bb33] transition-colors text-white md:shadow-[#9c9c9c] md:shadow-lg"
-              form="appointment"
-              type="submit"
-            >
-              AGENDAR
-            </button>
-          </div>
-        </FormProvider>
+        <div className="flex flex-col md:flex-row w-full justify-between">
+          <Link
+            to={"/"}
+            className="px-12 py-4 text-sm font-bold md:rounded-xl text-center bg-[#c6131b] text-white md:shadow-[#9c9c9c] md:shadow-lg button-hover"
+          >
+            CANCELAR
+          </Link>
+          <Button
+            className="px-12 py-4 text-sm font-bold md:rounded-xl text-center bg-[#22bb33] text-white md:shadow-[#9c9c9c] md:shadow-lg"
+            form="appointment"
+            type="submit"
+            label="AGENDAR"
+          />
+        </div>
       </main>
     </>
   );
