@@ -33,6 +33,7 @@ const UserMenu = ({ token, logout, className }: UserMenuProps) => {
         </Link>
       ) : (
         <Link
+          data-testid="login-btn"
           to={"/login"}
           className="rounded-xl text-sm text-center md:text-base md:px-6 py-2 text-[#0B4fff] font-bold md:border md:border-[#0B4FFF] button-hover"
         >
