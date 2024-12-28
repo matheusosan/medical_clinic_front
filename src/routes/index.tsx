@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import Agendamento from "../pages/Agendamento";
+import Agendamento from "../features/appointment/pages/Agendamento";
+import Login from "../features/auth/pages/Login";
+import Signup from "../features/auth/pages/Signup";
+import Profile from "../features/profile/pages";
 import HomePage from "../pages/Home";
-import Login from "../pages/Login";
-import Profile from "../pages/Profile";
-import Cadastrar from "../pages/Signup";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/cadastrar",
-    element: <Cadastrar />,
+    element: <Signup />,
   },
   {
     path: "/perfil",

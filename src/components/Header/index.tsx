@@ -3,11 +3,11 @@ import { Menu, X } from "lucide-react";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSidebar } from "../../context";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../features/auth/hooks/useAuth";
 import Button from "../Button";
-import MobileSidebar from "../MobileSidebar";
-import NavigationLinks from "../NavigationLinks";
-import UserMenu from "../UserMenu";
+import MobileSidebar from "./MobileSidebar";
+import NavigationLinks from "./NavigationLinks";
+import UserMenu from "./UserMenu";
 import LOGO from "/LOGO.png";
 
 export default function Header() {
