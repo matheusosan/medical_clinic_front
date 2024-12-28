@@ -5,19 +5,8 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { Service } from "../../../../api/services/specialities/getAllServices";
+import { toBRL } from "../../../../utils/formatters/number-to-brl";
 import { AppointmentSchema } from "../../hooks/useAppointment";
-
-const horarios = [
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-];
 
 interface AppointmentDetailsProps {
   specialities: Service[] | undefined;
@@ -25,6 +14,8 @@ interface AppointmentDetailsProps {
   control: Control<AppointmentSchema>;
   errors: FieldErrors<AppointmentSchema>;
   occupiedTimes: string[];
+  consultationPrice: number | null;
+  handleSpecialityChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function AppointmentDetails({
@@ -33,7 +24,21 @@ export default function AppointmentDetails({
   occupiedTimes,
   register,
   specialities,
+  consultationPrice,
+  handleSpecialityChange,
 }: AppointmentDetailsProps) {
+  const horarios = [
+    "09:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+  ];
+
   return (
     <div className="flex flex-col items-center md:items-start flex-1 md:px-60 pb-8 md:py-12 gap-8">
       <div className="flex flex-col items-center gap-5">
@@ -44,6 +49,7 @@ export default function AppointmentDetails({
           role="search"
           className="w-64 text-center md:text-left bg-transparent outline-none"
           {...register("speciality")}
+          onChange={handleSpecialityChange}
         >
           <option value="default">Selecione uma opção</option>
           {specialities?.map((speciality) => (
@@ -60,7 +66,7 @@ export default function AppointmentDetails({
       </div>
       <div className="flex flex-col text-center md:text-left gap-5">
         <h2 className="font-bold text-xl">Valor da Consulta</h2>
-        <p>R$99.90</p>
+        <p>{consultationPrice ? toBRL(consultationPrice) : ""}</p>
       </div>
       <div className="flex flex-col items-center gap-5">
         <h2 className="font-bold text-xl">Selecione uma data</h2>

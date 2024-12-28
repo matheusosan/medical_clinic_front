@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FORM_ERRORS_MESSAGES } from "./../../../constants/form-errors";
@@ -25,6 +26,21 @@ export type AppointmentSchema = z.infer<typeof schema>;
 
 export const useAppointment = () => {
   const { data: specialities } = useSpecialitiesQuery();
+  const [consultationPrice, setConsultationPrice] = useState<number | null>(
+    null
+  );
+
+  const handleSpecialityChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const selectedId = event.target.value;
+
+    const selectedSpeciality = specialities?.find(
+      (speciality) => String(speciality.id) === selectedId
+    );
+
+    setConsultationPrice(selectedSpeciality?.price ?? null);
+  };
 
   const {
     register,
@@ -75,5 +91,7 @@ export const useAppointment = () => {
     register,
     setValue,
     specialities,
+    consultationPrice,
+    handleSpecialityChange,
   };
 };

@@ -14,11 +14,13 @@ export default function Agendamento() {
     errors,
     occupiedTimes,
     specialities,
+    consultationPrice,
     handleSubmit,
     onSubmit,
     onSubmitCpf,
     register,
     setValue,
+    handleSpecialityChange,
   } = useAppointment();
 
   return (
@@ -50,6 +52,8 @@ export default function Agendamento() {
             occupiedTimes={occupiedTimes}
             register={register}
             specialities={specialities}
+            consultationPrice={consultationPrice}
+            handleSpecialityChange={handleSpecialityChange}
           />
         </form>
 
