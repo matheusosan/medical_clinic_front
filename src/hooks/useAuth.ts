@@ -28,6 +28,13 @@ export const useAuth = () => {
     }
   }, [token, error, navigate, location.pathname]);
 
+  useLayoutEffect(() => {
+    if (location.pathname === "/login" && token) {
+      navigate("/");
+      return;
+    }
+  }, [token, navigate, location.pathname]);
+
   const logout = () => {
     removeToken("access_token");
     queryClient.resetQueries({
