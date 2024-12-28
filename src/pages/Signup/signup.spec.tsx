@@ -2,7 +2,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import Cadastrar from ".";
 import { FORM_ERRORS_MESSAGES } from "../../constants/form-errors";
-import { fireEvent, render, screen } from "../../utils/test-utils";
+import { fireEvent, render, screen } from "../../utils/test/test-utils";
 import HomePage from "../Home";
 
 const newUser = {

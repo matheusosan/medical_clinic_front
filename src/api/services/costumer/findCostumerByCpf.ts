@@ -1,4 +1,4 @@
-import { cleanCpf } from "./../../../utils/input-masks";
+import { cleanCpf } from "../../../utils/formatters/input-masks";
 
 export const findCostumerByCpf = async (cpf: string) => {
   const cpfValue = cleanCpf(cpf);

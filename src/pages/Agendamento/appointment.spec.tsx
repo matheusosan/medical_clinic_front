@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import Agendamento from ".";
 import { FORM_ERRORS_MESSAGES } from "../../constants/form-errors";
 import { user, validCpf } from "../../mocks/responses/clientByCpfResponse";
-import { fireEvent, render, screen } from "../../utils/test-utils";
+import { fireEvent, render, screen } from "../../utils/test/test-utils";
 import HomePage from "../Home";
 
 describe("<Appointment>", () => {

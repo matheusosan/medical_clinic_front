@@ -1,10 +1,13 @@
 import Header from "../../components/Header";
+import { useAuth } from "../../hooks/useAuth";
 import LoginForm from "./components/LoginForm";
 import { useLogin } from "./hooks/useLogin";
 
 function Login() {
   const { errors, isDisabled, isSubmitting, handleSubmit, onSubmit, register } =
     useLogin();
+
+  useAuth();
 
   return (
     <>

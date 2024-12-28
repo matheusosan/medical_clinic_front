@@ -5,7 +5,7 @@ import {
   profileAppointmentsResponse,
   profileResponse,
 } from "../../mocks/responses/profileResponse";
-import { render, screen } from "../../utils/test-utils";
+import { render, screen } from "../../utils/test/test-utils";
 import { removeToken, setToken } from "../../utils/token-util";
 import Login from "../Login";
 

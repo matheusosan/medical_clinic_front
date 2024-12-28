@@ -6,7 +6,7 @@ import {
 } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { SignupSchema } from "../../../../lib/hookform/hooks/useSignuForm";
-import { cpfMask } from "../../../../utils/input-masks";
+import { cpfMask } from "../../../../utils/formatters/input-masks";
 
 interface SignUpFormProps {
   isSubmitting: boolean;

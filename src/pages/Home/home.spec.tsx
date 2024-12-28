@@ -1,7 +1,7 @@
-import { it, expect, describe } from "vitest";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { fireEvent, render, screen } from "../../utils/test-utils";
+import { describe, expect, it } from "vitest";
 import HomePage from ".";
+import { fireEvent, render, screen } from "../../utils/test/test-utils";
 import Agendamento from "../Agendamento";
 
 describe("<Home />", () => {

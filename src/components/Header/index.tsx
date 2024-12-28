@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 import Button from "../Button";
 import MobileSidebar from "../MobileSidebar";
 import NavigationLinks from "../NavigationLinks";
-import UserMenu from "../User";
+import UserMenu from "../UserMenu";
 import LOGO from "/LOGO.png";
 
 export default function Header() {
