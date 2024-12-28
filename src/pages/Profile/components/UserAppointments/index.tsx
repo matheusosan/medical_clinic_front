@@ -2,9 +2,9 @@ import { UseMutateFunction } from "@tanstack/react-query";
 import { LoaderCircle, Trash2 } from "lucide-react";
 import React from "react";
 import { Data } from "../../../../lib/react-query/queries/useClientAppointmentsQuery";
-import { formatDateToBRL } from "../../../../utils/formatDateToBrl";
-import { getStatusColor } from "../../../../utils/getStatusColor";
-import { toBRL } from "../../../../utils/number-to-brl";
+import { getStatusColor } from "../../../../utils/colors/getStatusColor";
+import { formatDateToBrazilianWithHour } from "../../../../utils/formatters/formatDateToBrl";
+import { toBRL } from "../../../../utils/formatters/number-to-brl";
 import SkeletonAppointments from "../AppointmentsSkeleton";
 
 interface UserAppointmentsProps {
@@ -40,8 +40,8 @@ export default function UserAppointments({
           >
             <option value="mostexpensive">maior valor</option>
             <option value="cheapest">menor valor</option>
-            <option value="oldest">mais antiga</option>
-            <option value="newest">mais recente</option>
+            <option value="oldest">anteriores</option>
+            <option value="newest">futuras</option>
           </select>
         </div>
 
@@ -71,7 +71,11 @@ export default function UserAppointments({
                         <label className="font-bold text-xl">
                           Data agendada
                         </label>
-                        <h2>{formatDateToBRL(appointment.dataAgendada)}</h2>
+                        <h2>
+                          {formatDateToBrazilianWithHour(
+                            appointment.dataAgendada
+                          )}
+                        </h2>
                       </div>
                       <div className="flex flex-col items-center">
                         <label className="font-bold text-xl">Status</label>

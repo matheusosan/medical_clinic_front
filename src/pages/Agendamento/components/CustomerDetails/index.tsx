@@ -7,7 +7,9 @@ import {
 } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { Costumer } from "../../../../api/services/costumer";
-import { cpfMask } from "../../../../utils/input-masks";
+import { formatDateToBrazilian } from "../../../../utils/formatters/formatDateToBrl";
+import { formatPhoneNumber } from "../../../../utils/formatters/formatPhoneNumber";
+import { cpfMask } from "../../../../utils/formatters/input-masks";
 import type { AppointmentSchema } from "../../hooks/useAppointment";
 
 interface CustomerDetailsProps {
@@ -79,12 +81,12 @@ export default function CustomerDetails({
 
           <div className="flex flex-col items-center md:items-start gap-2 md:gap-5">
             <h2 className="font-bold text-xl">Telefone</h2>
-            {client ? client.phoneNumber : ""}
+            {client ? formatPhoneNumber(client.phoneNumber) : ""}
           </div>
 
           <div className="flex flex-col items-center md:items-start gap-2 md:gap-5">
             <h2 className="font-bold text-xl">Data de nascimento</h2>
-            {client ? client.birthDate : ""}
+            {client ? formatDateToBrazilian(client.birthDate) : ""}
           </div>
         </>
       )}
