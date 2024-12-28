@@ -6,10 +6,10 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Costumer } from "../../../../features/auth/services/createClient";
 import { formatDateToBrazilian } from "../../../../utils/formatters/formatDateToBrl";
 import { formatPhoneNumber } from "../../../../utils/formatters/formatPhoneNumber";
 import { cpfMask } from "../../../../utils/formatters/input-masks";
-import { Costumer } from "../../../profile/services";
 import type { AppointmentSchema } from "../../hooks/useAppointment";
 
 interface CustomerDetailsProps {
