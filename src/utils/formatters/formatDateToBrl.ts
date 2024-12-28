@@ -1,4 +1,4 @@
-export const formatDateToBRL = (dateString: string): string => {
+export const formatDateToBrazilianWithHour = (dateString: string): string => {
   const date = new Date(dateString);
 
   const day = date.getDate().toString().padStart(2, "0");
@@ -8,4 +8,9 @@ export const formatDateToBRL = (dateString: string): string => {
   const minutes = date.getMinutes().toString().padStart(2, "0");
 
   return `${day}/${month}/${year} ${hours}:${minutes}`;
+};
+
+export const formatDateToBrazilian = (dateString: string) => {
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
 };

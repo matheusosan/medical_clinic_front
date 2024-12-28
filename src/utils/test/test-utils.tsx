@@ -2,7 +2,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, RenderOptions } from "@testing-library/react";
 import React, { ReactElement } from "react";
-import { SidebarProvider } from "../context";
+import { SidebarProvider } from "../../context";
 
 const queryClient = new QueryClient({
   defaultOptions: {
