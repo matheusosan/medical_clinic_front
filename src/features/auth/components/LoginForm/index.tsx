@@ -5,7 +5,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { LoginSchema } from "../../hooks/useLoginForm";
+import { LoginSchema } from "../../hooks/useLogin";
 
 interface LoginFormProps {
   handleSubmit: UseFormHandleSubmit<LoginSchema>;
