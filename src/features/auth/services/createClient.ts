@@ -7,12 +7,14 @@ export interface Costumer {
   phoneNumber: string;
   cpf: string;
   birthDate: string;
+  role?: string;
 }
 
 export const createClient = async (clientData: Costumer) => {
   const cleanClientData: Costumer = {
     ...clientData,
     cpf: cleanCpf(clientData.cpf),
+    role: "USER",
   };
 
   return await fetch("http://localhost:8080/client", {
