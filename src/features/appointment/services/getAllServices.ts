@@ -5,7 +5,7 @@ export interface Service {
 }
 
 export const getAllServices = async (): Promise<Service[]> => {
-  const res = await fetch("http://localhost:8080/service");
+  const res = await fetch(`${import.meta.env.VITE_API_URL}service`);
   const data = await res.json();
   return data;
 };

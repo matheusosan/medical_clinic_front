@@ -10,7 +10,9 @@ export const getAllAppointmentsByClient = async (
     throw new Error("Token não encontrado");
   }
   const response = await fetch(
-    `http://localhost:8080/appointment/client/${userId}?sortBy=${sortBy}`,
+    `${
+      import.meta.env.VITE_API_URL
+    }/appointment/client/${userId}?sortBy=${sortBy}`,
     {
       headers: {
         "Content-Type": "application/json",

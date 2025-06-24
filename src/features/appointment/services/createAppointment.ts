@@ -10,7 +10,7 @@ export const createAppointment = async (
     clientId: clientId,
   };
 
-  return await fetch(`http://localhost:8080/appointment`, {
+  return await fetch(`${import.meta.env.VITE_API_URL}appointment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

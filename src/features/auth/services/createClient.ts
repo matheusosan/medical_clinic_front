@@ -17,7 +17,7 @@ export const createClient = async (clientData: Costumer) => {
     role: "USER",
   };
 
-  return await fetch("http://localhost:8080/client", {
+  return await fetch(`${import.meta.env.VITE_API_URL}client`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

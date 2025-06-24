@@ -17,7 +17,7 @@ export const getProfile = async (): Promise<ClientResponseDTO> => {
     throw new Error("Token não encontrado");
   }
 
-  const res = await fetch("http://localhost:8080/client/profile", {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}client/profile`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
