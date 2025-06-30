@@ -12,5 +12,6 @@ export const fetchOccupiedTimes = async (
   const horario = data.map((appointment: { dataAgendada: string }) =>
     appointment.dataAgendada.substring(11, 16)
   );
+  console.log(horario);
   return horario;
 };
