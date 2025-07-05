@@ -13,7 +13,6 @@ export const useAuth = () => {
   const {
     data: userData,
     isError: isUserError,
-    error,
     isLoading: isUserLoading,
   } = useProfileQuery();
   const token = getToken();
@@ -21,19 +20,37 @@ export const useAuth = () => {
   const userId = userData?.data.id;
 
   useLayoutEffect(() => {
-    if (location.pathname === "/perfil" && (!token || error)) {
+    if (
+      location.pathname === "/perfil" &&
+      !isUserLoading &&
+      (!token || isUserError)
+    ) {
       removeToken("access_token");
       navigate("/login");
-      return;
     }
-  }, [token, error, navigate, location.pathname]);
+  }, [token, isUserError, isUserLoading, navigate, location.pathname, userId]);
 
   useLayoutEffect(() => {
-    if (location.pathname === "/login" && token) {
+    if (
+      location.pathname === "/login" &&
+      token &&
+      !isUserLoading &&
+      !isUserError
+    ) {
       navigate("/");
-      return;
     }
-  }, [token, navigate, location.pathname]);
+  }, [token, isUserLoading, isUserError, navigate, location.pathname, userId]);
+
+  useLayoutEffect(() => {
+    if (
+      location.pathname === "/login" &&
+      token &&
+      !isUserLoading &&
+      !isUserError
+    ) {
+      navigate("/");
+    }
+  }, [token, isUserLoading, isUserError, navigate, location.pathname]);
 
   const logout = () => {
     removeToken("access_token");
