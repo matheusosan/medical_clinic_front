@@ -1,1 +1,1 @@
-export { getProfile, type ClientResponseDTO } from "./getProfile";
+export { getProfile } from "./getProfile";
