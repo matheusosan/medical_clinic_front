@@ -5,9 +5,9 @@ import { useClientAppointmentsQuery } from "./useClientAppointmentsQuery";
 
 export const useProfile = () => {
   const [sortBy, setSortBy] = useState("newest");
-  const { userData, userId, isUserLoading } = useAuth();
+  const { userData, isUserLoading } = useAuth();
   const { data: appointments, isLoading: isAppointmentsLoading } =
-    useClientAppointmentsQuery(userId, sortBy);
+    useClientAppointmentsQuery(userData?.id, sortBy);
   const { mutate, isPending } = useCancelAppointmentMutation();
 
   return {

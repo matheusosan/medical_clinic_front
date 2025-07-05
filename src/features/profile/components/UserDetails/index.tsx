@@ -23,7 +23,7 @@ export default function UserDetails({ props }: UserDetailsProps) {
           <h2 className="text-black ">
             Bem vindo,{" "}
             <span className="font-bold text-[#0B4FFF]">
-              {props.userData?.data.name}
+              {props.userData?.name}
             </span>
           </h2>
         </>
