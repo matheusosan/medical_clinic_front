@@ -1,10 +1,7 @@
 import { getToken } from "../../../utils/token-util";
-import { ApiResponseDto } from "./../../../domain/dtos/ApiResponseDto";
 import { ClientResponseDTO } from "./../../../domain/dtos/clients/ClientResponseDTO";
 
-export const getProfile = async (): Promise<
-  ApiResponseDto<ClientResponseDTO>
-> => {
+export const getProfile = async (): Promise<ClientResponseDTO> => {
   const token = getToken();
 
   if (!token) {
@@ -24,6 +21,5 @@ export const getProfile = async (): Promise<
   }
 
   const data = await res.json();
-  console.log("Profile data:", data);
   return data;
 };

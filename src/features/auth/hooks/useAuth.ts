@@ -18,8 +18,6 @@ export const useAuth = () => {
   } = useProfileQuery();
   const token = getToken();
 
-  const userId = userData?.data?.id;
-
   useLayoutEffect(() => {
     if (location.pathname === "/perfil" && (!token || error)) {
       removeToken("access_token");
@@ -42,5 +40,5 @@ export const useAuth = () => {
     });
   };
 
-  return { userData, isUserError, isUserLoading, userId, logout, token };
+  return { userData, isUserError, isUserLoading, logout, token };
 };
