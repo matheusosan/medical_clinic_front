@@ -24,5 +24,6 @@ export const getProfile = async (): Promise<
   }
 
   const data = await res.json();
+  console.log("Profile data:", data);
   return data;
 };
