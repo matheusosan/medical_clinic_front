@@ -17,8 +17,6 @@ export const useAuth = () => {
   } = useProfileQuery();
   const token = getToken();
 
-  const userId = userData?.data?.id;
-
   useLayoutEffect(() => {
     if (
       location.pathname === "/perfil" &&
@@ -28,7 +26,14 @@ export const useAuth = () => {
       removeToken("access_token");
       navigate("/login");
     }
-  }, [token, isUserError, isUserLoading, navigate, location.pathname, userId]);
+  }, [
+    token,
+    isUserError,
+    isUserLoading,
+    navigate,
+    location.pathname,
+    userData?.data.id,
+  ]);
 
   useLayoutEffect(() => {
     if (
@@ -39,7 +44,14 @@ export const useAuth = () => {
     ) {
       navigate("/");
     }
-  }, [token, isUserLoading, isUserError, navigate, location.pathname, userId]);
+  }, [
+    token,
+    isUserLoading,
+    isUserError,
+    navigate,
+    location.pathname,
+    userData?.data.id,
+  ]);
 
   useLayoutEffect(() => {
     if (
@@ -59,5 +71,12 @@ export const useAuth = () => {
     });
   };
 
-  return { userData, isUserError, isUserLoading, userId, logout, token };
+  return {
+    userData,
+    isUserError,
+    isUserLoading,
+    userId: userData?.data.id,
+    logout,
+    token,
+  };
 };
