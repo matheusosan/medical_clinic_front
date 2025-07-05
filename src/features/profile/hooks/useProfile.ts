@@ -7,7 +7,7 @@ export const useProfile = () => {
   const [sortBy, setSortBy] = useState("newest");
   const { userData, userId, isUserLoading } = useAuth();
   const { data: appointments, isLoading: isAppointmentsLoading } =
-    useClientAppointmentsQuery(userId!, sortBy);
+    useClientAppointmentsQuery(userId, sortBy);
   const { mutate, isPending } = useCancelAppointmentMutation();
 
   return {

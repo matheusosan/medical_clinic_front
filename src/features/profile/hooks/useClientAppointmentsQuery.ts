@@ -3,7 +3,7 @@ import { QUERY_KEYS } from "../../../lib/react-query/query-keys";
 import { getAllAppointmentsByClient } from "../services/getAllAppointmentsByClient";
 
 export const useClientAppointmentsQuery = (
-  userId: string,
+  userId?: string,
   sortBy: string = "newest"
 ) => {
   return useQuery({
