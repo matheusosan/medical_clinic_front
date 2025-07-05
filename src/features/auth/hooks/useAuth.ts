@@ -17,7 +17,9 @@ export const useAuth = () => {
   } = useProfileQuery();
   const token = getToken();
 
-  const userId = userData?.data.id;
+  const userId = userData?.data.id ?? null;
+
+  console.log("userId", userId);
 
   useLayoutEffect(() => {
     if (
