@@ -1,33 +1,16 @@
 import { KeyRound, LoaderCircle, Mail } from "lucide-react";
-import {
-  FieldErrors,
-  UseFormHandleSubmit,
-  UseFormRegister,
-} from "react-hook-form";
 import { Link } from "react-router-dom";
-import { LoginSchema } from "../../hooks/useLogin";
+import { useLogin } from "../../hooks/useLogin";
 
-interface LoginFormProps {
-  handleSubmit: UseFormHandleSubmit<LoginSchema>;
-  onSubmit: (data: LoginSchema) => void;
-  register: UseFormRegister<LoginSchema>;
-  errors: FieldErrors<LoginSchema>;
-  isDisabled: boolean;
-  isSubmitting: boolean;
-}
+type LoginProps = {
+  props: ReturnType<typeof useLogin>;
+};
 
-export default function LoginForm({
-  errors,
-  isSubmitting,
-  isDisabled,
-  handleSubmit,
-  onSubmit,
-  register,
-}: LoginFormProps) {
+export default function LoginForm({ props }: LoginProps) {
   return (
     <form
       data-testid="submit-btn"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={props.handleSubmit(props.onSubmit)}
       className="flex flex-col p-4 md:p-24 gap-10 rounded-xl"
     >
       <h2 className="text-2xl md:text-4xl text-center font-extrabold text-[#0b4fff]">
@@ -37,13 +20,13 @@ export default function LoginForm({
         <label className="text-sm font-bold">E-mail</label>
         <div
           className={`flex justify-between items-center border px-4 py-1 rounded-md ${
-            errors.email ? "border-red-400" : ""
+            props.errors.email ? "border-red-400" : ""
           }`}
         >
           <input
-            {...register("email")}
+            {...props.register("email")}
             className={`outline-none placeholder:text-sm ${
-              errors.email
+              props.errors.email
                 ? "placeholder:text-red-400"
                 : "placeholder:text-slate-600"
             }`}
@@ -51,13 +34,15 @@ export default function LoginForm({
             placeholder="Digite seu email"
           />
           <Mail
-            className={`${errors.email ? "text-red-400" : "text-slate-600"}`}
+            className={`${
+              props.errors.email ? "text-red-400" : "text-slate-600"
+            }`}
             size={18}
           />
         </div>
-        {errors.email?.message && (
+        {props.errors.email?.message && (
           <p data-testid="error" className="text-red-500 text-sm">
-            {errors.email.message}
+            {props.errors.email.message}
           </p>
         )}
       </div>
@@ -65,13 +50,13 @@ export default function LoginForm({
         <label className="text-sm font-bold">Senha</label>
         <div
           className={`flex justify-between items-center border px-4 py-1 rounded-md ${
-            errors.password ? "border-red-400" : ""
+            props.errors.password ? "border-red-400" : ""
           }`}
         >
           <input
-            {...register("password")}
+            {...props.register("password")}
             className={`outline-none placeholder:text-sm ${
-              errors.password
+              props.errors.password
                 ? "placeholder:text-red-400"
                 : "placeholder:text-slate-600"
             }`}
@@ -80,23 +65,29 @@ export default function LoginForm({
           />
           <KeyRound
             className={` ${
-              errors.password ? "text-red-400" : "text-slate-600"
+              props.errors.password ? "text-red-400" : "text-slate-600"
             }`}
             size={18}
           />
         </div>
-        {errors.password?.message && (
-          <p className="text-red-500 text-sm">{errors.password.message}</p>
+        {props.errors.password?.message && (
+          <p className="text-red-500 text-sm">
+            {props.errors.password.message}
+          </p>
         )}
       </div>
 
       <button
-        disabled={isDisabled}
+        disabled={props.isDisabled}
         className={`font-bold text-white h-12 py-2 px-6 rounded-lg bg-[#0B4FFF] ${
-          isDisabled ? "opacity-80 cursor-not-allowed" : ""
+          props.isDisabled ? "opacity-80 cursor-not-allowed" : ""
         }`}
       >
-        {isSubmitting ? <LoaderCircle className="animate-spin" /> : "Entrar"}
+        {props.isSubmitting ? (
+          <LoaderCircle className="animate-spin" />
+        ) : (
+          "Entrar"
+        )}
       </button>
       <p>
         Não possui cadastro? Cadastre-se{" "}

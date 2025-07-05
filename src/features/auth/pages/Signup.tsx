@@ -3,8 +3,7 @@ import SignUpForm from "../components/SignUpForm";
 import { useSignup } from "../hooks/useSignup";
 
 export default function Signup() {
-  const { errors, isSubmitting, handleSubmit, onSubmit, register, setValue } =
-    useSignup();
+  const data = useSignup();
 
   return (
     <>
@@ -15,14 +14,7 @@ export default function Signup() {
         </h2>
 
         <div className="flex gap-24 items-center">
-          <SignUpForm
-            errors={errors}
-            handleSubmit={handleSubmit}
-            isSubmitting={isSubmitting}
-            onSubmit={onSubmit}
-            register={register}
-            setValue={setValue}
-          />
+          <SignUpForm props={data} />
         </div>
       </main>
     </>
