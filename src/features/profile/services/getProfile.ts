@@ -1,16 +1,10 @@
 import { getToken } from "../../../utils/token-util";
+import { ApiResponseDto } from "./../../../domain/dtos/ApiResponseDto";
+import { ClientResponseDTO } from "./../../../domain/dtos/clients/ClientResponseDTO";
 
-export interface ClientResponseDTO {
-  id: number;
-  name: string;
-  email: string;
-  phoneNumber: string;
-  cpf: string;
-  birthDate: string;
-  role: string;
-}
-
-export const getProfile = async (): Promise<ClientResponseDTO> => {
+export const getProfile = async (): Promise<
+  ApiResponseDto<ClientResponseDTO>
+> => {
   const token = getToken();
 
   if (!token) {

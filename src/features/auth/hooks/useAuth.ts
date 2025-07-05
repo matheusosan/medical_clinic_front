@@ -18,7 +18,7 @@ export const useAuth = () => {
   } = useProfileQuery();
   const token = getToken();
 
-  const userId = userData?.id;
+  const userId = userData?.data.id;
 
   useLayoutEffect(() => {
     if (location.pathname === "/perfil" && (!token || error)) {

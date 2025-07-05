@@ -25,17 +25,19 @@ const schema = z.object({
 export type AppointmentSchema = z.infer<typeof schema>;
 
 export const useAppointment = () => {
-  const { data: specialities } = useSpecialitiesQuery();
+  const { data: specialitiesRes } = useSpecialitiesQuery();
   const [consultationPrice, setConsultationPrice] = useState<number | null>(
     null
   );
+
+  const specialities = specialitiesRes?.data;
 
   const handleSpecialityChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     const selectedId = event.target.value;
 
-    const selectedSpeciality = specialities?.find(
+    const selectedSpeciality = specialities!.find(
       (speciality) => String(speciality.id) === selectedId
     );
 
@@ -58,11 +60,16 @@ export const useAppointment = () => {
   const dateInput = watch("selectedDate");
 
   const {
-    data: client,
+    data: clientRes,
     isLoading: isClientLoading,
     isError: isClientError,
     refetch,
   } = useGetClientByCpfQuery(cpfInput);
+
+  const client = clientRes?.data;
+
+  const { occupiedTimes } = useCheckScheduledTimes(specialityInput, dateInput);
+  const { mutate } = useCreateAppointmentMutation();
 
   const onSubmitCpf = () => {
     if (cpfInput.length === 14) {
@@ -70,12 +77,8 @@ export const useAppointment = () => {
     }
   };
 
-  const { occupiedTimes } = useCheckScheduledTimes(specialityInput, dateInput);
-
-  const { mutate } = useCreateAppointmentMutation();
-
   const onSubmit = (data: AppointmentSchema) => {
-    mutate({ data, clientId: client!.id! });
+    mutate({ data, clientId: client!.id });
   };
 
   return {

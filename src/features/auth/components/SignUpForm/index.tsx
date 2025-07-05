@@ -1,116 +1,104 @@
-import {
-  FieldErrors,
-  UseFormHandleSubmit,
-  UseFormRegister,
-  UseFormSetValue,
-} from "react-hook-form";
 import { Link } from "react-router-dom";
 import { cpfMask } from "../../../../utils/formatters/input-masks";
-import { SignupSchema } from "../../hooks/useSignup";
+import { useSignup } from "../../hooks/useSignup";
 
-interface SignUpFormProps {
-  isSubmitting: boolean;
-  errors: FieldErrors<SignupSchema>;
-  handleSubmit: UseFormHandleSubmit<SignupSchema>;
-  onSubmit: (data: SignupSchema) => void;
-  register: UseFormRegister<SignupSchema>;
-  setValue: UseFormSetValue<SignupSchema>;
-}
+type SignupProps = {
+  props: ReturnType<typeof useSignup>;
+};
 
-export default function SignUpForm({
-  isSubmitting,
-  errors,
-  handleSubmit,
-  onSubmit,
-  register,
-  setValue,
-}: SignUpFormProps) {
+export default function SignUpForm({ props }: SignupProps) {
   return (
     <form
       data-testid="submit-btn"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={props.handleSubmit(props.onSubmit)}
       className="flex md:w-[450px] flex-col p-0 md:p-12 mt-4 gap-6 rounded-xl "
     >
       <div className="flex flex-col gap-2">
         <label className="text-sm font-bold">Nome</label>
         <input
-          {...register("name")}
+          {...props.register("name")}
           className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
           type="text"
           placeholder="Digite seu nome"
         />
-        {errors.name?.message && (
+        {props.errors.name?.message && (
           <p data-testid="error" className="text-red-500 mt-2 text-sm">
-            {errors.name.message}
+            {props.errors.name.message}
           </p>
         )}
       </div>
       <div className="flex flex-col gap-2">
         <label className="text-sm font-bold">Data de nascimento</label>
         <input
-          {...register("birthDate")}
+          {...props.register("birthDate")}
           className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
           type="date"
           placeholder="Digite sua data de nascimento"
         />
-        {errors.birthDate?.message && (
+        {props.errors.birthDate?.message && (
           <p className="text-red-500 mt-2 text-sm">
-            {errors.birthDate.message}
+            {props.errors.birthDate.message}
           </p>
         )}
       </div>
       <div className="flex flex-col gap-2">
         <label className="text-sm font-bold">CPF</label>
         <input
-          {...register("cpf")}
+          {...props.register("cpf")}
           className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
           type="text"
           placeholder="Digite seu CPF"
           onChange={(e) => {
             const maskedValue = cpfMask(e.target.value);
-            setValue("cpf", maskedValue);
+            props.setValue("cpf", maskedValue);
           }}
         />
-        {errors.cpf?.message && (
-          <p className="text-red-500 mt-2 text-sm">{errors.cpf.message}</p>
+        {props.errors.cpf?.message && (
+          <p className="text-red-500 mt-2 text-sm">
+            {props.errors.cpf.message}
+          </p>
         )}
       </div>
       <div className="flex flex-col gap-2">
         <label className="text-sm font-bold">Senha</label>
         <input
-          {...register("password")}
+          {...props.register("password")}
           className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
           type="password"
           placeholder="Crie uma senha"
         />
-        {errors.password?.message && (
-          <p className="text-red-500 mt-2 text-sm">{errors.password.message}</p>
+        {props.errors.password?.message && (
+          <p className="text-red-500 mt-2 text-sm">
+            {props.errors.password.message}
+          </p>
         )}
       </div>
       <div className="flex flex-col gap-2">
         <label className="text-sm font-bold">Número de telefone</label>
         <input
-          {...register("phoneNumber")}
+          {...props.register("phoneNumber")}
           className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
           type="text"
           placeholder="Digite seu número de telefone"
         />
-        {errors.phoneNumber?.message && (
+        {props.errors.phoneNumber?.message && (
           <p className="text-red-500 mt-2 text-sm">
-            {errors.phoneNumber.message}
+            {props.errors.phoneNumber.message}
           </p>
         )}
       </div>
       <div className="flex flex-col gap-2">
         <label className="text-sm font-bold">Email</label>
         <input
-          {...register("email")}
+          {...props.register("email")}
           className="outline-none px-4 py-1 rounded-md border placeholder:text-base placeholder:text-slate-600"
           type="text"
           placeholder="Digite seu email"
         />
-        {errors.email?.message && (
-          <p className="text-red-500 mt-2 text-sm">{errors.email.message}</p>
+        {props.errors.email?.message && (
+          <p className="text-red-500 mt-2 text-sm">
+            {props.errors.email.message}
+          </p>
         )}
       </div>
 
@@ -122,7 +110,7 @@ export default function SignUpForm({
           Cancelar
         </Link>
         <button className="font-bold text-white h-12 py-2 px-6 rounded-lg bg-[#0B4FFF]">
-          {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+          {props.isSubmitting ? "Cadastrando..." : "Cadastrar"}
         </button>
       </div>
     </form>

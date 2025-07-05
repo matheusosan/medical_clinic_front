@@ -14,7 +14,9 @@ export const useCheckScheduledTimes = (
     const loadOccupiedTimes = async () => {
       if (specialityInput && dateInput) {
         const times = await fetchOccupiedTimes(dateInput, specialityInput);
-        setOccupiedTimes(times);
+        setOccupiedTimes(
+          times.data.map((appointment) => appointment.dataAgendada)
+        );
       }
     };
 
