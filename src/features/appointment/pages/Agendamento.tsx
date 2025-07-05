@@ -1,28 +1,12 @@
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
-
 import AppointmentDetails from "../components/AppointmentDetails";
 import CustomerDetails from "../components/CustomerDetails";
 import { useAppointment } from "../hooks/useAppointment";
 
 export default function Agendamento() {
-  const {
-    isClientError,
-    isClientLoading,
-    client,
-    control,
-    errors,
-    occupiedTimes,
-    specialities,
-    consultationPrice,
-    handleSubmit,
-    onSubmit,
-    onSubmitCpf,
-    register,
-    setValue,
-    handleSpecialityChange,
-  } = useAppointment();
+  const data = useAppointment();
 
   return (
     <>
@@ -35,27 +19,10 @@ export default function Agendamento() {
         <form
           id="appointment"
           className="flex flex-col md:flex-row border border-slate-200 rounded-xl w-full"
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={data.handleSubmit(data.onSubmit)}
         >
-          <CustomerDetails
-            client={client}
-            errors={errors}
-            handleSubmit={handleSubmit}
-            isClientError={isClientError}
-            isClientLoading={isClientLoading}
-            onSubmitCpf={onSubmitCpf}
-            register={register}
-            setValue={setValue}
-          />
-          <AppointmentDetails
-            control={control}
-            errors={errors}
-            occupiedTimes={occupiedTimes}
-            register={register}
-            specialities={specialities}
-            consultationPrice={consultationPrice}
-            handleSpecialityChange={handleSpecialityChange}
-          />
+          <CustomerDetails props={data} />
+          <AppointmentDetails props={data} />
         </form>
 
         <div className="flex flex-col md:flex-row w-full justify-between">

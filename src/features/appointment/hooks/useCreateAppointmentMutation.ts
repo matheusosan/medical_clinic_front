@@ -15,20 +15,16 @@ export const useCreateAppointmentMutation = () => {
       clientId,
     }: {
       data: AppointmentSchema;
-      clientId: number;
+      clientId: string;
     }) => {
       return createAppointment(data, clientId);
     },
     onSuccess: (response) => {
-      if (response.ok) {
+      if (response.statusCode === 201) {
         navigate("/");
         toast.success("Consulta agendada com sucesso!");
 
         queryClient.removeQueries({ queryKey: ["costumer"] });
-      } else {
-        response.json().then((errorData: ErrorResponseDTO) => {
-          toast.error(`Ocorreu um erro: ${errorData.message}`);
-        });
       }
     },
     onError: (error: ErrorResponseDTO) => {

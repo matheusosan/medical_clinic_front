@@ -1,21 +1,17 @@
-import { ClientResponseDTO } from "../../services";
+import { useProfile } from "../../hooks/useProfile";
 import ProfileSkeleton from "../ProfileSkeleton";
 
-interface UserDetailsProps {
-  isUserLoading: boolean;
-  userData: ClientResponseDTO | undefined;
-}
+type UserDetailsProps = {
+  props: ReturnType<typeof useProfile>;
+};
 
-export default function UserDetails({
-  isUserLoading,
-  userData,
-}: UserDetailsProps) {
+export default function UserDetails({ props }: UserDetailsProps) {
   return (
     <section className="flex flex-col items-center h-full w-full md:w-[400px] border-r border-slate-300 gap-4 py-4 md:py-0 border-b  md:gap-12">
       <h2 className="text-3xl text-center md:py-6 w-full font-bold text-[#0B4FFF]">
         Perfil
       </h2>
-      {isUserLoading ? (
+      {props.isUserLoading ? (
         <ProfileSkeleton />
       ) : (
         <>
@@ -26,7 +22,9 @@ export default function UserDetails({
           />
           <h2 className="text-black ">
             Bem vindo,{" "}
-            <span className="font-bold text-[#0B4FFF]">{userData?.name}</span>
+            <span className="font-bold text-[#0B4FFF]">
+              {props.userData?.data.name}
+            </span>
           </h2>
         </>
       )}

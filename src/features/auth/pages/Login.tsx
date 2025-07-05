@@ -4,9 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useLogin } from "../hooks/useLogin";
 
 function Login() {
-  const { errors, isDisabled, isSubmitting, handleSubmit, onSubmit, register } =
-    useLogin();
-
+  const data = useLogin();
   useAuth();
 
   return (
@@ -14,14 +12,7 @@ function Login() {
       <main className="flex flex-col w-full h-screen">
         <Header />
         <div className="flex justify-center h-[70%] w-full">
-          <LoginForm
-            errors={errors}
-            handleSubmit={handleSubmit}
-            isDisabled={isDisabled}
-            isSubmitting={isSubmitting}
-            onSubmit={onSubmit}
-            register={register}
-          />
+          <LoginForm props={data} />
         </div>
       </main>
     </>

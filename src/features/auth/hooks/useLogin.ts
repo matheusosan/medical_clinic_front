@@ -10,6 +10,7 @@ const schema = z.object({
 });
 
 export type LoginSchema = z.infer<typeof schema>;
+export type LoginProps = ReturnType<typeof useLogin>;
 
 export const useLogin = () => {
   const { mutate, isPending } = useLoginMutation();
